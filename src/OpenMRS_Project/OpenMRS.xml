@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<suite name="my suit">
+
+
+    <test name="test1">
+        <parameter name="browserTipi" value="chrome"></parameter>
+
+        <classes>
+            <class name="OpenMRS_Project.OpenMRS"></class>
+        </classes>
+
+    </test>
+
+</suite>
