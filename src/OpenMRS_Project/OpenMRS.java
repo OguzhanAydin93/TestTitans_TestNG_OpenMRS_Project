@@ -40,4 +40,9 @@ public class OpenMRS extends BaseDriver {
 
 
     }
+
+    @Test
+    public void US_402_Mert(){
+
+    }
 }
