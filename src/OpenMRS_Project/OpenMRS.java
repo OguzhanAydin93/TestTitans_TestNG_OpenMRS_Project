@@ -17,36 +17,32 @@ public class OpenMRS extends BaseDriver {
 
         driver.get("https://openmrs.org/demo/");
 
-        for (int i = 0; i < 6; i++) {
+        wait.until(ExpectedConditions.elementToBeClickable(elementler.demo));
+        elementler.demo.click();
 
+        wait.until(ExpectedConditions.elementToBeClickable(elementler.exploreOpenMRS2));
+        elementler.exploreOpenMRS2.click();
 
-            elementler.demo.click();
-            wait.until(ExpectedConditions.visibilityOf(elementler.demo));
+        wait.until(ExpectedConditions.elementToBeClickable(elementler.enterOpenMRS2Demo));
+        elementler.enterOpenMRS2Demo.click();
 
-            wait.until(ExpectedConditions.elementToBeClickable(elementler.exploreOpenMRS2));
-            elementler.exploreOpenMRS2.click();
+        elementler.username.clear();
+        elementler.password.clear();
+        elementler.username.sendKeys(username + Keys.ENTER);
+        elementler.password.sendKeys(password + Keys.ENTER);
 
-            wait.until(ExpectedConditions.elementToBeClickable(elementler.enterOpenMRS2Demo));
-            elementler.enterOpenMRS2Demo.click();
+        elementler.loginButton.click();
 
-            elementler.username.clear();
-            elementler.password.clear();
-            elementler.username.sendKeys(username + Keys.ENTER);
-            elementler.password.sendKeys(password + Keys.ENTER);
+        System.out.println(elementler.locationError.getText());
+        Assert.assertEquals(elementler.locationError.getText(), "You must choose a location!", "Bu Uyarı Bulunamadı");
 
-            elementler.loginButton.click();
+        elementler.locationSelect.click();
 
-            System.out.println(elementler.locationError.getText());
-            Assert.assertEquals(elementler.locationError.getText(), "You must choose a location!", "Bu Uyarı Bulunamadı");
+        elementler.loginButton.click();
 
-            elementler.locationSelect.click();
+        System.out.println(elementler.usernamePasswordError.getText());
+        Assert.assertEquals(elementler.usernamePasswordError.getText(), "Invalid username/password. Please try again.", "Bu Uyarı Bulunamadı");
 
-            elementler.loginButton.click();
-
-            System.out.println(elementler.usernamePasswordError.getText());
-            Assert.assertEquals(elementler.usernamePasswordError.getText(), "Invalid username/password. Please try again.", "Bu Uyarı Bulunamadı");
-
-        }
 
     }
 

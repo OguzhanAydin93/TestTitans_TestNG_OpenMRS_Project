@@ -19,7 +19,7 @@ public class ElementBox {
 
     /*******************Us-401****************/
 
-    @FindBy(linkText = "Gösteri")
+    @FindBy(css = "[class='zak-header-button zak-header-button--1']>a")
     public WebElement demo;
 
     @FindBy(xpath = "(//span[@class='elementor-button-text'])[2]")
