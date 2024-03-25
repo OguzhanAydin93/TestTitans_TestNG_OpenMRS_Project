@@ -64,6 +64,10 @@ public class OpenMRS extends BaseDriver {
         return kullaniciVeSifre;
 
     }
+    @Test
+    public void US_402_Mert(){
+
+    }
 
 
 
