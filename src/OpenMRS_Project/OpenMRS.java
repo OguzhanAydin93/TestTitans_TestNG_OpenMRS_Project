@@ -71,6 +71,7 @@ public class OpenMRS extends BaseDriver {
     public void US_402_Mert(String userName, String password) {
         driver.get("https://openmrs.org/demo/");
 
+        wait.until(ExpectedConditions.elementToBeClickable(elements.demoButton));
         elements.demoButton.click();
         wait.until(ExpectedConditions.elementToBeClickable(elements.exploreButton));
         elements.exploreButton.click();
