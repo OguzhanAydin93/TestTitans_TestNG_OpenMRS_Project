@@ -17,6 +17,21 @@ public class POM_Mert {
     @FindBy (xpath = "(//span[@class='elementor-button-text'])[4]")
     public WebElement enterMrsButton;
 
+    @FindBy (css = "[name='username']")
+    public WebElement userName;
+
+    @FindBy (css = "[name='password']")
+    public WebElement password;
+
+    @FindBy (css = "[class='select']")
+    public WebElement location;
+
+    @FindBy (css = "[class='btn confirm']")
+    public WebElement logInButton;
+
+    @FindBy (css = "[class='alert alert-danger']")
+    public WebElement alertDanger;
+
 
 
 }
