@@ -8,6 +8,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class OpenMRS extends BaseDriver {
+    ElementBox elementler = new ElementBox();
 
     @Test(dataProvider = "Sifrelerim")
     public void US_401_Oguzhan(String username, String password) {
@@ -16,33 +17,32 @@ public class OpenMRS extends BaseDriver {
 
         for (int i = 0; i < 6; i++) {
 
-        ElementBox elementler = new ElementBox();
 
-        elementler.demo.click();
-        wait.until(ExpectedConditions.visibilityOf(elementler.demo));
+            elementler.demo.click();
+            wait.until(ExpectedConditions.visibilityOf(elementler.demo));
 
-        wait.until(ExpectedConditions.elementToBeClickable(elementler.exploreOpenMRS2));
-        elementler.exploreOpenMRS2.click();
+            wait.until(ExpectedConditions.elementToBeClickable(elementler.exploreOpenMRS2));
+            elementler.exploreOpenMRS2.click();
 
-        wait.until(ExpectedConditions.elementToBeClickable(elementler.enterOpenMRS2Demo));
-        elementler.enterOpenMRS2Demo.click();
+            wait.until(ExpectedConditions.elementToBeClickable(elementler.enterOpenMRS2Demo));
+            elementler.enterOpenMRS2Demo.click();
 
-        elementler.username.clear();
-        elementler.password.clear();
-        elementler.username.sendKeys(username + Keys.ENTER);
-        elementler.password.sendKeys(password + Keys.ENTER);
+            elementler.username.clear();
+            elementler.password.clear();
+            elementler.username.sendKeys(username + Keys.ENTER);
+            elementler.password.sendKeys(password + Keys.ENTER);
 
-        elementler.loginButton.click();
+            elementler.loginButton.click();
 
-        System.out.println( elementler.locationError.getText());
-        Assert.assertEquals(elementler.locationError.getText(), "You must choose a location!", "Bu Uyarı Bulunamadı");
+            System.out.println(elementler.locationError.getText());
+            Assert.assertEquals(elementler.locationError.getText(), "You must choose a location!", "Bu Uyarı Bulunamadı");
 
-        elementler.locationSelect.click();
+            elementler.locationSelect.click();
 
-        elementler.loginButton.click();
+            elementler.loginButton.click();
 
-        System.out.println(elementler.usernamePasswordError.getText());
-        Assert.assertEquals(elementler.usernamePasswordError.getText(), "Invalid username/password. Please try again.", "Bu Uyarı Bulunamadı");
+            System.out.println(elementler.usernamePasswordError.getText());
+            Assert.assertEquals(elementler.usernamePasswordError.getText(), "Invalid username/password. Please try again.", "Bu Uyarı Bulunamadı");
 
         }
 
@@ -65,7 +65,12 @@ public class OpenMRS extends BaseDriver {
 
     }
 
+    @Test
+    public void US_402_Mert() {
+        driver.get("https://openmrs.org/demo/");
 
+
+    }
 
 
 }
