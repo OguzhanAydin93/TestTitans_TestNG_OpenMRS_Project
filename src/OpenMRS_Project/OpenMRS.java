@@ -74,7 +74,9 @@ public class OpenMRS extends BaseDriver {
 
     @Test
     public void US_405_Zehra(){
-        driver.get("https://openmrs.org/demo/");
+        Zehra_POM zhrElements=new Zehra_POM();
+        zhrElements.login();
+
     }
 
 
