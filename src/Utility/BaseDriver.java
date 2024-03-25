@@ -15,36 +15,37 @@ import java.time.Duration;
 
 public class BaseDriver {
 
-    public static Logger logger= LogManager.getLogger();
+    public static Logger logger = LogManager.getLogger();
 
     public static WebDriverWait wait;
     public static WebDriver driver;
 
     @BeforeClass
-    @Parameters("browserTipi")
-    public void BaslangicIslemleri(String browserTipi) {
+    // @Parameters("browserTipi")
+    public void BaslangicIslemleri() {//String browserTipi {
 
-        switch (browserTipi.toLowerCase()) {
-            case "chrome":
-                driver = new ChromeDriver();
-                break;
-            case "firefox":
-                driver = new FirefoxDriver();
-                break;
-            case "edge":
-                driver = new EdgeDriver();
-                break;
-            default:driver=new ChromeDriver();break;
-        }
+        //  switch (browserTipi.toLowerCase()) {
+        //    case "chrome":
+        //      driver = new ChromeDriver();
+        //    break;
+        //case "firefox":
+        //  driver = new FirefoxDriver();
+        //break;
+        //case "edge":
+        //  driver = new EdgeDriver();
+        //break;
+        //default:driver=new ChromeDriver();break;
 
+
+        WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
         wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
 
-
     }
+
 
     @AfterClass
     public void KapanisIslemleri() {
