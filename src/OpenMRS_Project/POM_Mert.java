@@ -8,8 +8,14 @@ import org.openqa.selenium.support.PageFactory;
 public class POM_Mert {
     public POM_Mert(){PageFactory.initElements(BaseDriver.driver, this);}
 
-    @FindBy (css = "[class='zak-header-button zak-header-button--1']")
+    @FindBy (css = "[class='zak-header-button zak-header-button--1']>a")
     public WebElement demoButton;
+
+    @FindBy (xpath = "(//span[@class='elementor-button-text'])[2]")
+    public WebElement exploreButton;
+
+    @FindBy (xpath = "(//span[@class='elementor-button-text'])[4]")
+    public WebElement enterMrsButton;
 
 
 

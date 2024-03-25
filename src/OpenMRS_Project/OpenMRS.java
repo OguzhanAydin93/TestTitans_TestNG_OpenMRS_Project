@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 
 public class OpenMRS extends BaseDriver {
     ElementBox elementler = new ElementBox();
+    POM_Mert elements=new POM_Mert();
 
     @Test(dataProvider = "Sifrelerim")
     public void US_401_Oguzhan(String username, String password) {
@@ -68,6 +69,12 @@ public class OpenMRS extends BaseDriver {
     @Test
     public void US_402_Mert() {
         driver.get("https://openmrs.org/demo/");
+
+        elements.demoButton.click();
+        wait.until(ExpectedConditions.elementToBeClickable(elements.exploreButton));
+        elements.exploreButton.click();
+        elements.enterMrsButton.click();
+
 
 
     }
