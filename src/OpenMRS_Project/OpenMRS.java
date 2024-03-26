@@ -2,9 +2,7 @@ package OpenMRS_Project;
 
 import Utility.BaseDriver;
 import Utility.MyFunc;
-import org.apache.logging.log4j.core.jmx.AppenderAdmin;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -26,6 +24,7 @@ public class OpenMRS extends BaseDriver {
         elementler.exploreOpenMRS2.click();
 
         wait.until(ExpectedConditions.elementToBeClickable(elementler.enterOpenMRS2Demo));
+        MyFunc.bekle(1);
         elementler.enterOpenMRS2Demo.click();
 
         wait.until(ExpectedConditions.visibilityOf(elementler.username));
