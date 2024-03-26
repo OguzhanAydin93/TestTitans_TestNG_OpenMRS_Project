@@ -134,6 +134,20 @@ public class OpenMRS extends BaseDriver {
 
 
     }
+        @Test
+    public void US_406_Asli(){
 
+
+
+
+
+
+
+
+
+
+
+
+        }
 
 }
