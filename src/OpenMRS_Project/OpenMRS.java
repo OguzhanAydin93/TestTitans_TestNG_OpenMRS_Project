@@ -10,7 +10,6 @@ import org.testng.annotations.Test;
 public class OpenMRS extends BaseDriver {
 
 
-
     @Test(dataProvider = "Sifrelerim")
     public void US_401_Oguzhan(String username, String password) {
 
@@ -41,6 +40,7 @@ public class OpenMRS extends BaseDriver {
         Assert.assertTrue(elementler.usernamePasswordError.getText().contains("Invalid username/password. Please try again."));
 
     }
+
     @DataProvider
     Object[][] Sifrelerim() {
         Object[][] kullaniciVeSifre =
@@ -79,27 +79,26 @@ public class OpenMRS extends BaseDriver {
         elements.logInButton.click();
 
         if (
-                ((elements.userName.equals("admin")) ||
-                        (elements.userName.equals("admin1")) ||
-                        (elements.userName.equals("admin3")) ||
-                        (elements.userName.equals("admin5")) ||
-                        (elements.userName.equals("admin7")) ||
-                        (elements.userName.equals("admin9")))
+                ((userName.equals("admin")) ||
+                        (userName.equals("admin1")) ||
+                        (userName.equals("admin3")) ||
+                        (userName.equals("admin5")) ||
+                        (userName.equals("admin7")) ||
+                        (userName.equals("admin9")))
                         &&
-                        elements.password.equals("admin1")) {
-            Assert.assertTrue(elements.alertDanger.getText().toLowerCase().contains("invalid"));
-        }
-        else if (elements.userName.equals("Admin") && elements.password.equals("Admin123")) {
+                        password.equals("admin1")) {
+            Assert.assertTrue(elements.alertDanger.getText().toLowerCase().contains("ınvalid"));
+        } else if (userName.equals("Admin") && password.equals("Admin123")) {
             Assert.assertTrue(elements.loginAccount.getText().contains("Logged"));
 
 
         }
-
     }
+
 
     @DataProvider
     Object[][] notSuccessfully() {
-        Object[][] usernameAndPassword =
+        Object[][] usernameAndPasswordd =
                 {
                         {"admin", "admin1"},
                         {"admin1", "admin1"},
@@ -107,9 +106,9 @@ public class OpenMRS extends BaseDriver {
                         {"admin5", "admin1"},
                         {"admin7", "admin1"},
                         {"admin9", "admin1"},
-                        {"Admin","Admin123"}
+                        {"Admin", "Admin123"}
                 };
-        return usernameAndPassword;
+        return usernameAndPasswordd;
     }
 
 }
