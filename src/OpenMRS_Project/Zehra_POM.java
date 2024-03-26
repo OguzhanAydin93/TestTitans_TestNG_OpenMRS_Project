@@ -40,9 +40,11 @@ public class Zehra_POM {
     public WebElement changePassword;
     @FindBy(xpath = "(//i[contains(@class, 'icon-cog')])")
     public WebElement myLanguages;
+    @FindBy(css = "[class='button app big']")
+    public List<WebElement> passwordLanguages;
 
     public void login(){
-        driver.get("https://openmrs.org/demo/");
+        driver.navigate().to("https://openmrs.org/demo/");
 
 
         demoButton.click();

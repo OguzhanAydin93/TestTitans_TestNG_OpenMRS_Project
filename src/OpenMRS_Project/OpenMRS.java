@@ -2,6 +2,7 @@ package OpenMRS_Project;
 
 import Utility.BaseDriver;
 import Utility.MyFunc;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
@@ -104,7 +105,19 @@ public class OpenMRS extends BaseDriver {
         wait.until(ExpectedConditions.elementToBeClickable(elements.myAccount));
         elements.myAccount.click();
 
+        wait.until(ExpectedConditions.visibilityOfAllElements(elements.passwordLanguages));
 
+        for (WebElement dogrula : elements.passwordLanguages) {
+            System.out.println(dogrula.getText());
+            Assert.assertTrue(dogrula.isDisplayed(),"Change password ve My Languages bulunamadı.");
+        }
+
+        elements.changePassword.click();
+        wait.until(ExpectedConditions.urlContains("changePassword"));
+        driver.navigate().back();
+        elements.myLanguages.click();
+        wait.until(ExpectedConditions.urlContains("changeDefaults"));
+        driver.navigate().back();
 
 
     }
