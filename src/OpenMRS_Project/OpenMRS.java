@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 
 public class OpenMRS extends BaseDriver {
 
-    POM_Mert elements = new POM_Mert();
+
 
     @Test(dataProvider = "Sifrelerim")
     public void US_401_Oguzhan(String username, String password) {
@@ -60,6 +60,7 @@ public class OpenMRS extends BaseDriver {
 
     @Test(dataProvider = "notSuccessfully")
     public void US_402_Mert(String userName, String password) {
+        POM_Mert elements = new POM_Mert();
         driver.get("https://openmrs.org/demo/");
 
         wait.until(ExpectedConditions.elementToBeClickable(elements.demoButton));
