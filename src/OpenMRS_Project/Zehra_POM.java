@@ -32,6 +32,14 @@ public class Zehra_POM {
     public List<WebElement> locationRndm;
     @FindBy(css = "[id='loginButton']")
     public WebElement loginButton;
+    @FindBy(xpath = "(//i[contains(@class, 'icon-user')])[1]")
+    public WebElement admin;
+    @FindBy(linkText = "My Account")
+    public WebElement myAccount;
+    @FindBy(xpath = "(//i[contains(@class, 'icon-lock')])")
+    public WebElement changePassword;
+    @FindBy(xpath = "(//i[contains(@class, 'icon-cog')])")
+    public WebElement myLanguages;
 
     public void login(){
         driver.get("https://openmrs.org/demo/");

@@ -2,6 +2,7 @@ package OpenMRS_Project;
 
 import Utility.BaseDriver;
 import Utility.MyFunc;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -99,6 +100,10 @@ public class OpenMRS extends BaseDriver {
     public void US_405_Zehra(){
         Zehra_POM zhrElements=new Zehra_POM();
         zhrElements.login();
+        new Actions(driver).moveToElement(zhrElements.admin).build().perform();
+        wait.until(ExpectedConditions.elementToBeClickable(zhrElements.myAccount));
+        zhrElements.myAccount.click();
+
 
     }
 
