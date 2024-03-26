@@ -105,6 +105,8 @@ public class OpenMRS extends BaseDriver {
         elements.myAccount.click();
 
 
+
+
     }
 
 
