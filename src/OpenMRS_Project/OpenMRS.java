@@ -1,50 +1,43 @@
 package OpenMRS_Project;
 
 import Utility.BaseDriver;
-import org.openqa.selenium.Keys;
+import Utility.MyFunc;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class OpenMRS extends BaseDriver {
-    ElementBox elementler = new ElementBox();
+
 
     @Test(dataProvider = "Sifrelerim")
     public void US_401_Oguzhan(String username, String password) {
 
         driver.get("https://openmrs.org/demo/");
 
-        for (int i = 0; i < 6; i++) {
+        ElementBox elementler = new ElementBox();
 
+        elementler.demo.click();
 
-            elementler.demo.click();
-            wait.until(ExpectedConditions.visibilityOf(elementler.demo));
+        wait.until(ExpectedConditions.elementToBeClickable(elementler.exploreOpenMRS2));
+        elementler.exploreOpenMRS2.click();
 
-            wait.until(ExpectedConditions.elementToBeClickable(elementler.exploreOpenMRS2));
-            elementler.exploreOpenMRS2.click();
+        wait.until(ExpectedConditions.elementToBeClickable(elementler.enterOpenMRS2Demo));
+        MyFunc.bekle(1);
+        elementler.enterOpenMRS2Demo.click();
 
-            wait.until(ExpectedConditions.elementToBeClickable(elementler.enterOpenMRS2Demo));
-            elementler.enterOpenMRS2Demo.click();
+        wait.until(ExpectedConditions.visibilityOf(elementler.username));
+        elementler.username.sendKeys(username);
+        wait.until(ExpectedConditions.visibilityOf(elementler.password));
+        elementler.password.sendKeys(password);
 
-            elementler.username.clear();
-            elementler.password.clear();
-            elementler.username.sendKeys(username + Keys.ENTER);
-            elementler.password.sendKeys(password + Keys.ENTER);
+        wait.until(ExpectedConditions.elementToBeClickable(elementler.loginButton));
+        elementler.loginButton.click();
 
-            elementler.loginButton.click();
-
-            System.out.println(elementler.locationError.getText());
-            Assert.assertEquals(elementler.locationError.getText(), "You must choose a location!", "Bu Uyarı Bulunamadı");
-
-            elementler.locationSelect.click();
-
-            elementler.loginButton.click();
-
-            System.out.println(elementler.usernamePasswordError.getText());
-            Assert.assertEquals(elementler.usernamePasswordError.getText(), "Invalid username/password. Please try again.", "Bu Uyarı Bulunamadı");
-
-        }
+        elementler.locationSelect.click();
+        Assert.assertTrue(elementler.locationError.getText().contains("You must choose a location!"));
+        elementler.loginButton.click();
+        Assert.assertTrue(elementler.usernamePasswordError.getText().contains("Invalid username/password. Please try again."));
 
     }
 
@@ -52,12 +45,12 @@ public class OpenMRS extends BaseDriver {
     Object[][] Sifrelerim() {
         Object[][] kullaniciVeSifre =
                 {
-                        {"null1", "null2"},
-                        {"null2", "null2"},
-                        {"null3", "null3"},
-                        {"null4", "null4"},
-                        {"null5", "null5"},
-                        {"null6", "null6"},
+                        {"null1", "null1"},
+                        {"null2", "null1"},
+                        {"null3", "null1"},
+                        {"null4", "null1"},
+                        {"null5", "null1"},
+                        {"null6", "null1"},
 
                 };
 
@@ -65,11 +58,41 @@ public class OpenMRS extends BaseDriver {
 
     }
 
-    @Test
-    public void US_402_Mert() {
+    @Test(dataProvider = "notSuccessfully")
+    public void US_402_Mert(String userName, String password) {
         driver.get("https://openmrs.org/demo/");
+        POM_Mert elements = new POM_Mert();
+
+        wait.until(ExpectedConditions.elementToBeClickable(elements.demoButton));
+        elements.demoButton.click();
+        wait.until(ExpectedConditions.elementToBeClickable(elements.exploreButton));
+        elements.exploreButton.click();
+        MyFunc.bekle(2);
+        elements.enterMrsButton.click();
+        wait.until(ExpectedConditions.visibilityOf(elements.userName));
+        elements.userName.sendKeys(userName);
+        wait.until(ExpectedConditions.visibilityOf(elements.password));
+        elements.password.sendKeys(password);
+        wait.until(ExpectedConditions.elementToBeClickable(elements.location));
+        elements.location.click();
+        wait.until(ExpectedConditions.elementToBeClickable(elements.logInButton));
+        elements.logInButton.click();
+
+        if (
+                ((userName.equals("admin")) ||
+                        (userName.equals("admin1")) ||
+                        (userName.equals("admin3")) ||
+                        (userName.equals("admin5")) ||
+                        (userName.equals("admin7")) ||
+                        (userName.equals("admin9")))
+                        &&
+                        password.equals("admin1")) {
+            Assert.assertTrue(elements.alertDanger.getText().toLowerCase().contains("ınvalid"));
+        } else if (userName.equals("Admin") && password.equals("Admin123")) {
+            Assert.assertTrue(elements.loginAccount.getText().contains("Logged"));
 
 
+        }
     }
 
     @Test
@@ -79,5 +102,20 @@ public class OpenMRS extends BaseDriver {
 
     }
 
+
+    @DataProvider
+    Object[][] notSuccessfully() {
+        Object[][] usernameAndPasswordd =
+                {
+                        {"admin", "admin1"},
+                        {"admin1", "admin1"},
+                        {"admin3", "admin1"},
+                        {"admin5", "admin1"},
+                        {"admin7", "admin1"},
+                        {"admin9", "admin1"},
+                        {"Admin", "Admin123"}
+                };
+        return usernameAndPasswordd;
+    }
 
 }

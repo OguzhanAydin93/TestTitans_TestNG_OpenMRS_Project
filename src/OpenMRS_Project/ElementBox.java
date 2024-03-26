@@ -11,15 +11,9 @@ public class ElementBox {
         PageFactory.initElements(BaseDriver.driver, this);
     }
 
-//    @FindBy(css = "[class='gt_float_switcher-arrow']")
-//    public WebElement language;
-//
-//    @FindBy(css = "[data-gt-lang='en']")
-//    public WebElement languageSelect;
-
     /*******************Us-401****************/
 
-    @FindBy(linkText = "Gösteri")
+    @FindBy(css = "[class='zak-header-button zak-header-button--1']>a")
     public WebElement demo;
 
     @FindBy(xpath = "(//span[@class='elementor-button-text'])[2]")
@@ -47,6 +41,7 @@ public class ElementBox {
     public WebElement usernamePasswordError;
 
     /*******************Us-401****************/
+
 
 
 }
