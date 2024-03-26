@@ -98,11 +98,11 @@ public class OpenMRS extends BaseDriver {
 
     @Test
     public void US_405_Zehra(){
-        Zehra_POM zhrElements=new Zehra_POM();
-        zhrElements.login();
-        new Actions(driver).moveToElement(zhrElements.admin).build().perform();
-        wait.until(ExpectedConditions.elementToBeClickable(zhrElements.myAccount));
-        zhrElements.myAccount.click();
+        Zehra_POM elements=new Zehra_POM();
+        elements.login();
+        new Actions(driver).moveToElement(elements.admin).build().perform();
+        wait.until(ExpectedConditions.elementToBeClickable(elements.myAccount));
+        elements.myAccount.click();
 
 
     }
