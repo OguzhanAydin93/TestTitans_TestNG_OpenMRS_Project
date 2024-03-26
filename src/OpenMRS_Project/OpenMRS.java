@@ -106,6 +106,4 @@ public class OpenMRS extends BaseDriver {
         return usernameAndPassword;
     }
 
-
-
 }
