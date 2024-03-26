@@ -1,6 +1,7 @@
 package OpenMRS_Project;
 
 import Utility.BaseDriver;
+import Utility.MyFunc;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
@@ -8,7 +9,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class OpenMRS extends BaseDriver {
-    ElementBox elementler = new ElementBox();
+
     POM_Mert elements = new POM_Mert();
 
     @Test(dataProvider = "Sifrelerim")
@@ -16,7 +17,8 @@ public class OpenMRS extends BaseDriver {
 
         driver.get("https://openmrs.org/demo/");
 
-        wait.until(ExpectedConditions.elementToBeClickable(elementler.demo));
+        ElementBox elementler = new ElementBox();
+
         elementler.demo.click();
 
         wait.until(ExpectedConditions.elementToBeClickable(elementler.exploreOpenMRS2));
@@ -25,35 +27,20 @@ public class OpenMRS extends BaseDriver {
         wait.until(ExpectedConditions.elementToBeClickable(elementler.enterOpenMRS2Demo));
         elementler.enterOpenMRS2Demo.click();
 
-        wait.until(ExpectedConditions.urlToBe("https://demo.openmrs.org/openmrs/login.htm"));
-        elementler.username.clear();
-        elementler.password.clear();
+        wait.until(ExpectedConditions.visibilityOf(elementler.username));
         elementler.username.sendKeys(username);
+        wait.until(ExpectedConditions.visibilityOf(elementler.password));
         elementler.password.sendKeys(password);
 
+        wait.until(ExpectedConditions.elementToBeClickable(elementler.loginButton));
         elementler.loginButton.click();
 
-//        Assert.assertEquals(elementler.locationError.getText(), "You must choose a location!", "Bu Uyarı Bulunamadı");
         elementler.locationSelect.click();
+        Assert.assertTrue(elementler.locationError.getText().contains("You must choose a location!"));
         elementler.loginButton.click();
-//        Assert.assertEquals(elementler.usernamePasswordError.getText(), "Invalid username/password. Please try again.", "Bu Uyarı Bulunamadı");
-
-        if (
-                ((elements.userName.equals("null1")) ||
-                        (elements.userName.equals("null2")) ||
-                        (elements.userName.equals("null3")) ||
-                        (elements.userName.equals("null4")) ||
-                        (elements.userName.equals("null5")) ||
-                        (elements.userName.equals("null6")))
-                        &&
-                        elements.password.equals("null1")) {
-            Assert.assertEquals(elementler.locationError.getText(), "You must choose a location!", "Bu Uyarı Bulunamadı");
-            Assert.assertEquals(elementler.usernamePasswordError.getText(), "Invalid username/password. Please try again.", "Bu Uyarı Bulunamadı");
-        }
+        Assert.assertTrue(elementler.usernamePasswordError.getText().contains("Invalid username/password. Please try again."));
 
     }
-
-
     @DataProvider
     Object[][] Sifrelerim() {
         Object[][] kullaniciVeSifre =
@@ -118,7 +105,6 @@ public class OpenMRS extends BaseDriver {
                 };
         return usernameAndPassword;
     }
-
 
 
 

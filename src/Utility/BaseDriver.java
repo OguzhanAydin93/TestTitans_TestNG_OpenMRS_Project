@@ -37,7 +37,7 @@ public class BaseDriver {
         //default:driver=new ChromeDriver();break;
 
 
-        WebDriver driver = new ChromeDriver();
+        driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
@@ -45,6 +45,8 @@ public class BaseDriver {
 
 
     }
+
+
 
 
     @AfterClass
