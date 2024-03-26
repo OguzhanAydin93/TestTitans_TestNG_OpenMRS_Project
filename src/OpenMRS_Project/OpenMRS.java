@@ -68,12 +68,13 @@ public class OpenMRS extends BaseDriver {
         elements.demoButton.click();
         wait.until(ExpectedConditions.elementToBeClickable(elements.exploreButton));
         elements.exploreButton.click();
-        wait.until(ExpectedConditions.elementToBeClickable(elements.enterMrsButton));
+        MyFunc.bekle(2);
         elements.enterMrsButton.click();
         wait.until(ExpectedConditions.visibilityOf(elements.userName));
         elements.userName.sendKeys(userName);
         wait.until(ExpectedConditions.visibilityOf(elements.password));
         elements.password.sendKeys(password);
+        wait.until(ExpectedConditions.elementToBeClickable(elements.location));
         elements.location.click();
         wait.until(ExpectedConditions.elementToBeClickable(elements.logInButton));
         elements.logInButton.click();
@@ -88,9 +89,10 @@ public class OpenMRS extends BaseDriver {
                         &&
                         elements.password.equals("admin1")) {
             Assert.assertTrue(elements.alertDanger.getText().toLowerCase().contains("invalid"));
-        } else if (elements.userName.equals("Admin") && elements.password.equals("Admin123")) {
-            String currentUrl = driver.getCurrentUrl();
-            Assert.assertTrue(currentUrl.contains("home.page"));
+        }
+        else if (elements.userName.equals("Admin") && elements.password.equals("Admin123")) {
+            Assert.assertTrue(elements.loginAccount.getText().contains("Logged"));
+
 
         }
 

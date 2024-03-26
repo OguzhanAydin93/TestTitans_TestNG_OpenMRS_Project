@@ -29,8 +29,11 @@ public class POM_Mert {
     @FindBy (css = "[class='btn confirm']")
     public WebElement logInButton;
 
-    @FindBy (css = "[class='alert alert-danger']")
+    @FindBy (css = "[id='error-message']")
     public WebElement alertDanger;
+
+    @FindBy (css = "[class='col-12 col-sm-12 col-md-12 col-lg-12']>h4")
+    public WebElement loginAccount;
 
 
 
