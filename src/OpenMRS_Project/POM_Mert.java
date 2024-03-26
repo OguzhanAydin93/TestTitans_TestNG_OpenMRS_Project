@@ -17,13 +17,13 @@ public class POM_Mert {
     @FindBy (xpath = "(//span[@class='elementor-button-text'])[4]")
     public WebElement enterMrsButton;
 
-    @FindBy (css = "[name='username']")
+    @FindBy (xpath = "//input[@class='form-control form-control-sm form-control-lg form-control-md']")
     public WebElement userName;
 
-    @FindBy (css = "[name='password']")
+    @FindBy (xpath = "(//input[@class='form-control form-control-sm form-control-lg form-control-md'])[2]")
     public WebElement password;
 
-    @FindBy (css = "[class='select']")
+    @FindBy (css = "[id='Inpatient Ward']")
     public WebElement location;
 
     @FindBy (css = "[class='btn confirm']")

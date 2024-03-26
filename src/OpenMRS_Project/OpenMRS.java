@@ -2,6 +2,7 @@ package OpenMRS_Project;
 
 import Utility.BaseDriver;
 import Utility.MyFunc;
+import org.apache.logging.log4j.core.jmx.AppenderAdmin;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
@@ -60,19 +61,21 @@ public class OpenMRS extends BaseDriver {
 
     @Test(dataProvider = "notSuccessfully")
     public void US_402_Mert(String userName, String password) {
-        POM_Mert elements = new POM_Mert();
         driver.get("https://openmrs.org/demo/");
+        POM_Mert elements = new POM_Mert();
 
         wait.until(ExpectedConditions.elementToBeClickable(elements.demoButton));
         elements.demoButton.click();
         wait.until(ExpectedConditions.elementToBeClickable(elements.exploreButton));
         elements.exploreButton.click();
+        wait.until(ExpectedConditions.elementToBeClickable(elements.enterMrsButton));
         elements.enterMrsButton.click();
-        wait.until(ExpectedConditions.urlToBe("https://demo.openmrs.org/openmrs/login.htm"));
-        Select choose = new Select(elements.location);
-        choose.selectByValue("6");
+        wait.until(ExpectedConditions.visibilityOf(elements.userName));
         elements.userName.sendKeys(userName);
+        wait.until(ExpectedConditions.visibilityOf(elements.password));
         elements.password.sendKeys(password);
+        elements.location.click();
+        wait.until(ExpectedConditions.elementToBeClickable(elements.logInButton));
         elements.logInButton.click();
 
         if (
@@ -102,7 +105,8 @@ public class OpenMRS extends BaseDriver {
                         {"admin3", "admin1"},
                         {"admin5", "admin1"},
                         {"admin7", "admin1"},
-                        {"admin9", "admin1"}
+                        {"admin9", "admin1"},
+                        {"Admin","Admin123"}
                 };
         return usernameAndPassword;
     }
