@@ -1,6 +1,5 @@
 package OpenMRS_Project;
 
-import Utility.BaseDriver;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -15,14 +14,14 @@ import static Utility.BaseDriver.wait;
 public class Zehra_POM {
 
     public Zehra_POM() {
-        PageFactory.initElements(driver,this);
+        PageFactory.initElements(driver, this);
     }
 
-    @FindBy(xpath = "//a[@class='zak-button']")
+    @FindBy(css = "[class='zak-header-button zak-header-button--1']>a")
     public WebElement demoButton;
-    @FindBy(xpath = "//*[text()='Explore OpenMRS 2']")
+    @FindBy(xpath = "(//span[@class='elementor-button-text'])[2]")
     public WebElement exploreOpenMRS2;
-    @FindBy(xpath = "//*[text()='Enter the OpenMRS 2 Demo']")
+    @FindBy(xpath = "(//span[@class='elementor-button-text'])[4]")
     public WebElement enterOpenMRS2Demo;
     @FindBy(xpath = "//input[@placeholder='Enter your username']")
     public WebElement username;
@@ -42,8 +41,22 @@ public class Zehra_POM {
     public WebElement myLanguages;
     @FindBy(css = "[class='button app big']")
     public List<WebElement> passwordLanguages;
+    @FindBy(xpath = "(//i[contains(@class, 'icon-search')])")
+    public WebElement patientRecord;
+    @FindBy(css = "[id='patient-search']")
+    public WebElement patientSearch;
+    @FindBy(css = "[role='alert']")
+    public WebElement patientInfo;
+    @FindBy(xpath = "(//div[@class='col-11 col-lg-10'])[8]")
+    public WebElement patientDelete;
+    @FindBy(css = "[id='delete-reason']")
+    public WebElement deleteReason;
+    @FindBy(xpath = "(//button[text()='Confirm'])[4]")
+    public WebElement confirmBtn;
+    @FindBy(css = "[aria-relevant='all']")
+    public WebElement deleteConfirm;
 
-    public void login(){
+    public void login() {
         driver.navigate().to("https://openmrs.org/demo/");
 
 
@@ -65,7 +78,7 @@ public class Zehra_POM {
         wait.until(ExpectedConditions.elementToBeClickable(loginButton));
         loginButton.click();
 
-
-
     }
+
+
 }
