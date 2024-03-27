@@ -12,8 +12,9 @@ public class ElementBox {
         PageFactory.initElements(BaseDriver.driver, this);
     }
 
-    /*******************Us-401****************/
     JavascriptExecutor js=(JavascriptExecutor) BaseDriver.driver;
+
+    /*******************Us-401****************/
 
     @FindBy(css = "[class='zak-header-button zak-header-button--1']>a")
     public WebElement demo;
