@@ -185,6 +185,7 @@ public class OpenMRS extends BaseDriver {
 
 
 
+
     @DataProvider
     Object[] deletedPatient() {
         Object[] dltdPatient = {"zehra"};
