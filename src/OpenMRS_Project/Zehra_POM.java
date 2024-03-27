@@ -17,7 +17,7 @@ public class Zehra_POM {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(xpath = "//a[@class='zak-button']")
+    @FindBy(xpath = "[class='zak-header-button zak-header-button--1']>a")
     public WebElement demoButton;
     @FindBy(xpath = "//*[text()='Explore OpenMRS 2']")
     public WebElement exploreOpenMRS2;
