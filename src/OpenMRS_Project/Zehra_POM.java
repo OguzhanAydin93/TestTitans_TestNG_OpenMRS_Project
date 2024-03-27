@@ -42,6 +42,18 @@ public class Zehra_POM {
     public WebElement myLanguages;
     @FindBy(css = "[class='button app big']")
     public List<WebElement> passwordLanguages;
+    @FindBy(xpath = "(//i[contains(@class, 'icon-search')])")
+    public WebElement patientRecord;
+    @FindBy(css = "[id='patient-search']")
+    public WebElement patientSearch;
+    @FindBy(css = "[role='alert']")
+    public WebElement patientInfo;
+    @FindBy(xpath = "(//div[@class='col-11 col-lg-10'])[8]")
+    public WebElement patientDelete;
+    @FindBy(css = "[id='delete-reason']")
+    public WebElement deleteReason;
+    @FindBy(xpath = "(//button[text()='Confirm'])[4]")
+    public WebElement confirmBtn;
 
     public void login(){
         driver.navigate().to("https://openmrs.org/demo/");
