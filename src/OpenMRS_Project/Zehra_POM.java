@@ -56,6 +56,11 @@ public class Zehra_POM {
     @FindBy(css = "[aria-relevant='all']")
     public WebElement deleteConfirm;
 
+    @FindBy(css = "[class='col-12 col-sm-12 col-md-12 col-lg-12']>h4")
+    public WebElement superUser;
+    @FindBy(css = "[class='nav-item logout']>a")
+    public WebElement logout;
+
     public void login() {
         driver.navigate().to("https://openmrs.org/demo/");
 

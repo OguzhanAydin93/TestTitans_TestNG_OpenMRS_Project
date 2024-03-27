@@ -115,6 +115,17 @@ public class OpenMRS extends BaseDriver {
                 };
         return usernameAndPasswordd;
     }
+    @Test
+    public void US_403_Zehra() {
+        Zehra_POM elements = new Zehra_POM();
+        elements.login();
+
+        Assert.assertTrue(elements.superUser.isDisplayed());
+        wait.until(ExpectedConditions.elementToBeClickable(elements.logout));
+        elements.logout.click();
+        wait.until(ExpectedConditions.urlContains("login"));
+
+    }
 
     @Test
     public void US_404_Nuri() {
