@@ -109,6 +109,10 @@ public class OpenMRS extends BaseDriver {
                 };
         return usernameAndPasswordd;
     }
+    @Test
+    public void US_404_Nuri(){
+
+    }
 
     @Test
     public void US_405_Zehra(){
