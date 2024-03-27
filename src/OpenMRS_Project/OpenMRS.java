@@ -21,25 +21,18 @@ public class OpenMRS extends BaseDriver {
         ElementBox elementler = new ElementBox();
 
         elementler.demo.click();
-
         wait.until(ExpectedConditions.elementToBeClickable(elementler.exploreOpenMRS2));
         elementler.js.executeScript("arguments[0].scrollIntoView(true);", elementler.exploreOpenMRS2);
         elementler.exploreOpenMRS2.click();
-
         wait.until(ExpectedConditions.elementToBeClickable(elementler.enterOpenMRS2Demo));
         elementler.js.executeScript("arguments[0].scrollIntoView(true);", elementler.enterOpenMRS2Demo);
         elementler.js.executeScript("arguments[0].click();", elementler.enterOpenMRS2Demo);
-
-
-
         wait.until(ExpectedConditions.visibilityOf(elementler.username));
         elementler.username.sendKeys(username);
         wait.until(ExpectedConditions.visibilityOf(elementler.password));
         elementler.password.sendKeys(password);
-
         wait.until(ExpectedConditions.elementToBeClickable(elementler.loginButton));
         elementler.loginButton.click();
-
         elementler.locationSelect.click();
         Assert.assertTrue(elementler.locationError.getText().contains("You must choose a location!"));
         elementler.loginButton.click();
