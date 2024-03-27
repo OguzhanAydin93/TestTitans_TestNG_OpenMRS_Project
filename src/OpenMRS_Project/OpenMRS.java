@@ -103,6 +103,11 @@ public class OpenMRS extends BaseDriver {
         Zehra_POM elements=new Zehra_POM();
         elements.login();
 
+        Assert.assertTrue(elements.superUser.isDisplayed());
+        wait.until(ExpectedConditions.elementToBeClickable(elements.logout));
+        elements.logout.click();
+        wait.until(ExpectedConditions.urlContains("login"));
+
 
     }
     @Test
