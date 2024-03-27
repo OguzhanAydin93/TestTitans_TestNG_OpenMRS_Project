@@ -107,6 +107,7 @@ public class OpenMRS extends BaseDriver {
         wait.until(ExpectedConditions.elementToBeClickable(elements.logout));
         elements.logout.click();
         wait.until(ExpectedConditions.urlContains("login"));
+
     }
     @Test
     public void US_404_Nuri(){
