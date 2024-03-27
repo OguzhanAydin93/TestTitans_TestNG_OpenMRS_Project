@@ -193,7 +193,9 @@ public class OpenMRS extends BaseDriver {
     }
     public void US_408_Mert_Oguzhan(){
         POM_Mert elements = new POM_Mert();
-        elements.Login();
+        POM_Mert.Login();
+        elements.findPatientRecord.click();
+
     }
 
 

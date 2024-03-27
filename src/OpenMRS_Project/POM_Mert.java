@@ -7,39 +7,52 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class POM_Mert {
-    public POM_Mert(){PageFactory.initElements(BaseDriver.driver, this);}
+import java.util.List;
 
-    @FindBy (css = "[class='zak-header-button zak-header-button--1']>a")
+public class POM_Mert {
+    public POM_Mert() {
+        PageFactory.initElements(BaseDriver.driver, this);
+    }
+
+    @FindBy(css = "[class='zak-header-button zak-header-button--1']>a")
     public WebElement demoButton;
 
-    @FindBy (xpath = "(//span[@class='elementor-button-text'])[2]")
+    @FindBy(xpath = "(//span[@class='elementor-button-text'])[2]")
     public WebElement exploreButton;
 
-    @FindBy (xpath = "(//span[@class='elementor-button-text'])[4]")
+    @FindBy(xpath = "(//span[@class='elementor-button-text'])[4]")
     public WebElement enterMrsButton;
 
-    @FindBy (xpath = "//input[@class='form-control form-control-sm form-control-lg form-control-md']")
+    @FindBy(xpath = "//input[@class='form-control form-control-sm form-control-lg form-control-md']")
     public WebElement userName;
 
-    @FindBy (xpath = "(//input[@class='form-control form-control-sm form-control-lg form-control-md'])[2]")
+    @FindBy(xpath = "(//input[@class='form-control form-control-sm form-control-lg form-control-md'])[2]")
     public WebElement password;
 
-    @FindBy (css = "[id='Inpatient Ward']")
+    @FindBy(css = "[id='Inpatient Ward']")
     public WebElement location;
 
-    @FindBy (css = "[class='btn confirm']")
+    @FindBy(css = "[class='btn confirm']")
     public WebElement logInButton;
 
-    @FindBy (css = "[id='error-message']")
+    @FindBy(css = "[id='error-message']")
     public WebElement alertDanger;
 
-    @FindBy (css = "[class='col-12 col-sm-12 col-md-12 col-lg-12']>h4")
+    @FindBy(css = "[class='col-12 col-sm-12 col-md-12 col-lg-12']>h4")
     public WebElement loginAccount;
 
-    JavascriptExecutor js=(JavascriptExecutor) BaseDriver.driver;
+    @FindBy(css = "[class='icon-search']")
+    public WebElement findPatientRecord;
 
-    public static void Login(){
+    @FindBy(xpath = "//tbody[@aria-live='polite']")
+    public List<WebElement> hastaList;
+
+    @FindBy(css = "[class='dataTables_info']")
+    public WebElement showingEntries;
+
+    JavascriptExecutor js = (JavascriptExecutor) BaseDriver.driver;
+
+    public static void Login() {
         BaseDriver.driver.navigate().to("https://openmrs.org/demo/");
         POM_Mert elements = new POM_Mert();
 
@@ -58,9 +71,6 @@ public class POM_Mert {
         BaseDriver.wait.until(ExpectedConditions.elementToBeClickable(elements.logInButton));
         elements.logInButton.click();
     }
-
-
-
 
 
 }
