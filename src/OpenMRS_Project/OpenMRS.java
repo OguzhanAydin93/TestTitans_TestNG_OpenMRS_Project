@@ -101,20 +101,7 @@ public class OpenMRS extends BaseDriver {
 
         }
     }
-    @DataProvider
-    Object[][] notSuccessfully() {
-        Object[][] usernameAndPasswordd =
-                {
-                        {"admin", "admin1"},
-                        {"admin1", "admin1"},
-                        {"admin3", "admin1"},
-                        {"admin5", "admin1"},
-                        {"admin7", "admin1"},
-                        {"admin9", "admin1"},
-                        {"Admin", "Admin123"}
-                };
-        return usernameAndPasswordd;
-    }
+
     @Test
     public void US_403_Zehra() {
         Zehra_POM elements = new Zehra_POM();
@@ -180,6 +167,20 @@ public class OpenMRS extends BaseDriver {
         Assert.assertTrue(elements.deleteConfirm.isDisplayed(), "Hasta silinemedi.");
 
 
+    }
+    @DataProvider
+    Object[][] notSuccessfully() {
+        Object[][] usernameAndPasswordd =
+                {
+                        {"admin", "admin1"},
+                        {"admin1", "admin1"},
+                        {"admin3", "admin1"},
+                        {"admin5", "admin1"},
+                        {"admin7", "admin1"},
+                        {"admin9", "admin1"},
+                        {"Admin", "Admin123"}
+                };
+        return usernameAndPasswordd;
     }
 
 
