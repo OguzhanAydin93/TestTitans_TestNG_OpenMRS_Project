@@ -1,6 +1,7 @@
 package OpenMRS_Project;
 
 import Utility.BaseDriver;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -34,6 +35,11 @@ public class POM_Mert {
 
     @FindBy (css = "[class='col-12 col-sm-12 col-md-12 col-lg-12']>h4")
     public WebElement loginAccount;
+
+
+
+        JavascriptExecutor js=(JavascriptExecutor) BaseDriver.driver;
+
 
 
 
