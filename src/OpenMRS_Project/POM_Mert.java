@@ -5,6 +5,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class POM_Mert {
     public POM_Mert(){PageFactory.initElements(BaseDriver.driver, this);}
@@ -36,9 +37,28 @@ public class POM_Mert {
     @FindBy (css = "[class='col-12 col-sm-12 col-md-12 col-lg-12']>h4")
     public WebElement loginAccount;
 
+    JavascriptExecutor js=(JavascriptExecutor) BaseDriver.driver;
 
+    public static void Login(){
+        BaseDriver.driver.navigate().to("https://openmrs.org/demo/");
+        POM_Mert elements = new POM_Mert();
 
-        JavascriptExecutor js=(JavascriptExecutor) BaseDriver.driver;
+        BaseDriver.wait.until(ExpectedConditions.elementToBeClickable(elements.demoButton));
+        elements.demoButton.click();
+        elements.js.executeScript("arguments[0].scrollIntoView(true);", elements.exploreButton);
+        BaseDriver.wait.until(ExpectedConditions.elementToBeClickable(elements.exploreButton));
+        elements.exploreButton.click();
+        elements.js.executeScript("arguments[0].scrollIntoView(true);", elements.enterMrsButton);
+        elements.js.executeScript("arguments[0].click();", elements.enterMrsButton);
+        BaseDriver.wait.until(ExpectedConditions.visibilityOf(elements.userName));
+        elements.userName.sendKeys("Admin");
+        elements.password.sendKeys("Admin123");
+        BaseDriver.wait.until(ExpectedConditions.elementToBeClickable(elements.location));
+        elements.location.click();
+        BaseDriver.wait.until(ExpectedConditions.elementToBeClickable(elements.logInButton));
+        elements.logInButton.click();
+    }
+
 
 
 
