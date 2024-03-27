@@ -1,6 +1,7 @@
 package OpenMRS_Project;
 
 import Utility.BaseDriver;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -12,6 +13,7 @@ public class ElementBox {
     }
 
     /*******************Us-401****************/
+    JavascriptExecutor js=(JavascriptExecutor) BaseDriver.driver;
 
     @FindBy(css = "[class='zak-header-button zak-header-button--1']>a")
     public WebElement demo;

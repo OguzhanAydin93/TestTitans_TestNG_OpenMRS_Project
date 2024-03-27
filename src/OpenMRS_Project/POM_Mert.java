@@ -39,7 +39,7 @@ public class POM_Mert {
 
     JavascriptExecutor js=(JavascriptExecutor) BaseDriver.driver;
 
-    public void Login(){
+    public static void Login(){
         BaseDriver.driver.navigate().to("https://openmrs.org/demo/");
         POM_Mert elements = new POM_Mert();
 

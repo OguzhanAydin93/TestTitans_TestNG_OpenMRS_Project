@@ -23,11 +23,14 @@ public class OpenMRS extends BaseDriver {
         elementler.demo.click();
 
         wait.until(ExpectedConditions.elementToBeClickable(elementler.exploreOpenMRS2));
+        elementler.js.executeScript("arguments[0].scrollIntoView(true);", elementler.exploreOpenMRS2);
         elementler.exploreOpenMRS2.click();
 
         wait.until(ExpectedConditions.elementToBeClickable(elementler.enterOpenMRS2Demo));
-        MyFunc.bekle(1);
-        elementler.enterOpenMRS2Demo.click();
+        elementler.js.executeScript("arguments[0].scrollIntoView(true);", elementler.enterOpenMRS2Demo);
+        elementler.js.executeScript("arguments[0].click();", elementler.enterOpenMRS2Demo);
+
+
 
         wait.until(ExpectedConditions.visibilityOf(elementler.username));
         elementler.username.sendKeys(username);
@@ -175,5 +178,9 @@ public class OpenMRS extends BaseDriver {
         Object[] dltdPatient = {"zehra"};
         return dltdPatient;
 
+    }
+    public void US_408_Mert_Oguzhan(){
+        POM_Mert elements = new POM_Mert();
+        elements.Login();
     }
 }
