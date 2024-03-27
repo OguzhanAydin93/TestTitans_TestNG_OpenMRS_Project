@@ -101,6 +101,20 @@ public class OpenMRS extends BaseDriver {
 
         }
     }
+    @DataProvider
+    Object[][] notSuccessfully() {
+        Object[][] usernameAndPasswordd =
+                {
+                        {"admin", "admin1"},
+                        {"admin1", "admin1"},
+                        {"admin3", "admin1"},
+                        {"admin5", "admin1"},
+                        {"admin7", "admin1"},
+                        {"admin9", "admin1"},
+                        {"Admin", "Admin123"}
+                };
+        return usernameAndPasswordd;
+    }
 
     @Test
     public void US_403_Zehra() {
@@ -168,21 +182,6 @@ public class OpenMRS extends BaseDriver {
 
 
     }
-    @DataProvider
-    Object[][] notSuccessfully() {
-        Object[][] usernameAndPasswordd =
-                {
-                        {"admin", "admin1"},
-                        {"admin1", "admin1"},
-                        {"admin3", "admin1"},
-                        {"admin5", "admin1"},
-                        {"admin7", "admin1"},
-                        {"admin9", "admin1"},
-                        {"Admin", "Admin123"}
-                };
-        return usernameAndPasswordd;
-    }
-
 
 
 
