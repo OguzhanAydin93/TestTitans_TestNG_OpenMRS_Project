@@ -4,6 +4,7 @@ import Utility.BaseDriver;
 import Utility.MyFunc;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
@@ -23,14 +24,11 @@ public class OpenMRS extends BaseDriver {
         elementler.demo.click();
 
         wait.until(ExpectedConditions.elementToBeClickable(elementler.exploreOpenMRS2));
-        elementler.js.executeScript("arguments[0].scrollIntoView(true);", elementler.exploreOpenMRS2);
         elementler.exploreOpenMRS2.click();
 
         wait.until(ExpectedConditions.elementToBeClickable(elementler.enterOpenMRS2Demo));
-        elementler.js.executeScript("arguments[0].scrollIntoView(true);", elementler.enterOpenMRS2Demo);
-        elementler.js.executeScript("arguments[0].click();", elementler.enterOpenMRS2Demo);
-
-
+        MyFunc.bekle(1);
+        elementler.enterOpenMRS2Demo.click();
 
         wait.until(ExpectedConditions.visibilityOf(elementler.username));
         elementler.username.sendKeys(username);
@@ -71,11 +69,10 @@ public class OpenMRS extends BaseDriver {
 
         wait.until(ExpectedConditions.elementToBeClickable(elements.demoButton));
         elements.demoButton.click();
-        elements.js.executeScript("arguments[0].scrollIntoView(true);", elements.exploreButton);
         wait.until(ExpectedConditions.elementToBeClickable(elements.exploreButton));
         elements.exploreButton.click();
-        elements.js.executeScript("arguments[0].scrollIntoView(true);", elements.enterMrsButton);
-        elements.js.executeScript("arguments[0].click();", elements.enterMrsButton);
+        MyFunc.bekle(2);
+        elements.enterMrsButton.click();
         wait.until(ExpectedConditions.visibilityOf(elements.userName));
         elements.userName.sendKeys(userName);
         wait.until(ExpectedConditions.visibilityOf(elements.password));
@@ -101,7 +98,6 @@ public class OpenMRS extends BaseDriver {
 
         }
     }
-
     @Test
     public void US_403_Zehra() {
         Zehra_POM elements = new Zehra_POM();
@@ -113,15 +109,14 @@ public class OpenMRS extends BaseDriver {
         wait.until(ExpectedConditions.urlContains("login"));
 
     }
-
     @Test
-    public void US_404_Nuri() {
+    public void US_404_Nuri(){
 
     }
 
     @Test
-    public void US_405_Zehra() {
-        Zehra_POM elements = new Zehra_POM();
+    public void US_405_Zehra(){
+        Zehra_POM elements=new Zehra_POM();
         elements.login();
 
         new Actions(driver).moveToElement(elements.admin).build().perform();
@@ -132,7 +127,7 @@ public class OpenMRS extends BaseDriver {
 
         for (WebElement dogrula : elements.passwordLanguages) {
             System.out.println(dogrula.getText());
-            Assert.assertTrue(dogrula.isDisplayed(), "Change password ve My Languages bulunamadı.");
+            Assert.assertTrue(dogrula.isDisplayed(),"Change password ve My Languages bulunamadı.");
         }
 
         elements.changePassword.click();
@@ -143,11 +138,10 @@ public class OpenMRS extends BaseDriver {
         driver.navigate().back();
 
     }
-
     @Test(dataProvider = "deletedPatient")
-    public void US_407_Zehra(String patientDeleted) {
-        Zehra_POM elements = new Zehra_POM();
-        Actions actionDriver = new Actions(driver);
+    public void US_407_Zehra(String patientDeleted){
+        Zehra_POM elements=new Zehra_POM();
+        Actions actionDriver=new Actions(driver);
         elements.login();
 
 
@@ -164,10 +158,12 @@ public class OpenMRS extends BaseDriver {
 
         wait.until(ExpectedConditions.urlContains("findPatient"));
         elements.patientSearch.sendKeys(patientDeleted + Keys.ENTER);
-        Assert.assertTrue(elements.deleteConfirm.isDisplayed(), "Hasta silinemedi.");
+        Assert.assertTrue(elements.deleteConfirm.isDisplayed(),"Hasta silinemedi.");
 
 
     }
+
+
     @DataProvider
     Object[][] notSuccessfully() {
         Object[][] usernameAndPasswordd =
@@ -183,17 +179,10 @@ public class OpenMRS extends BaseDriver {
         return usernameAndPasswordd;
     }
 
-
-
-
     @DataProvider
-    Object[] deletedPatient() {
-        Object[] dltdPatient = {"zehra"};
+    Object[] deletedPatient(){
+        Object[] dltdPatient={"zehra"};
         return dltdPatient;
 
-    }
-    public void US_408_Mert_Oguzhan(){
-        POM_Mert elements = new POM_Mert();
-        elements.Login();
     }
 }
