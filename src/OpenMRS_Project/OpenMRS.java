@@ -2,6 +2,7 @@ package OpenMRS_Project;
 
 import Utility.BaseDriver;
 import Utility.MyFunc;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -118,6 +119,20 @@ public class OpenMRS extends BaseDriver {
         elements.myLanguages.click();
         wait.until(ExpectedConditions.urlContains("changeDefaults"));
         driver.navigate().back();
+
+    }
+    @Test
+    public void US_407_Zehra(){
+        Zehra_POM elements=new Zehra_POM();
+        elements.login();
+
+        elements.patientRecord.click();
+        elements.patientSearch.sendKeys("Nilgun" + Keys.ENTER);
+        elements.patientInfo.click();
+        wait.until(ExpectedConditions.urlContains("patientId"));
+
+
+
 
 
     }
