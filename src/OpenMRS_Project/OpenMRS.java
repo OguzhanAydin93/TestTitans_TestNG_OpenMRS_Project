@@ -99,6 +99,13 @@ public class OpenMRS extends BaseDriver {
         }
     }
     @Test
+    public void US_403_Zehra(){
+        Zehra_POM elements=new Zehra_POM();
+        elements.login();
+
+
+    }
+    @Test
     public void US_404_Nuri(){
 
     }

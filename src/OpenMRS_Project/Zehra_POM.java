@@ -55,6 +55,8 @@ public class Zehra_POM {
     public WebElement confirmBtn;
     @FindBy(css = "[aria-relevant='all']")
     public WebElement deleteConfirm;
+    @FindBy(xpath = "//*[ contains( text(), 'admin' )  ]")
+    public WebElement superUser;
 
     public void login() {
         driver.navigate().to("https://openmrs.org/demo/");
