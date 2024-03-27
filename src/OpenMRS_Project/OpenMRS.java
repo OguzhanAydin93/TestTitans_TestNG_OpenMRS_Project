@@ -4,6 +4,7 @@ import Utility.BaseDriver;
 import Utility.MyFunc;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
@@ -102,6 +103,7 @@ public class OpenMRS extends BaseDriver {
     public void US_405_Zehra(){
         Zehra_POM elements=new Zehra_POM();
         elements.login();
+
         new Actions(driver).moveToElement(elements.admin).build().perform();
         wait.until(ExpectedConditions.elementToBeClickable(elements.myAccount));
         elements.myAccount.click();
@@ -121,18 +123,27 @@ public class OpenMRS extends BaseDriver {
         driver.navigate().back();
 
     }
-    @Test
-    public void US_407_Zehra(){
+    @Test(dataProvider = "deletedPatient")
+    public void US_407_Zehra(String patientDeleted){
         Zehra_POM elements=new Zehra_POM();
+        Actions actionDriver=new Actions(driver);
         elements.login();
 
+
         elements.patientRecord.click();
-        elements.patientSearch.sendKeys("Nilgun" + Keys.ENTER);
+        elements.patientSearch.sendKeys(patientDeleted + Keys.ENTER);
         elements.patientInfo.click();
         wait.until(ExpectedConditions.urlContains("patientId"));
+        elements.patientDelete.click();
+        wait.until(ExpectedConditions.visibilityOf(elements.deleteReason));
 
+        actionDriver.click(elements.deleteReason).click().build();
+        actionDriver.sendKeys("Patient Request").build().perform();
+        actionDriver.click(elements.confirmBtn).build().perform();
 
-
+        wait.until(ExpectedConditions.urlContains("findPatient"));
+        elements.patientSearch.sendKeys(patientDeleted + Keys.ENTER);
+        Assert.assertTrue(elements.deleteConfirm.isDisplayed(),"Hasta silinemedi.");
 
 
     }
@@ -153,4 +164,10 @@ public class OpenMRS extends BaseDriver {
         return usernameAndPasswordd;
     }
 
+    @DataProvider
+    Object[] deletedPatient(){
+        Object[] dltdPatient={"zehra"};
+        return dltdPatient;
+
+    }
 }

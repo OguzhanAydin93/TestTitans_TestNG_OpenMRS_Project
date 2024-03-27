@@ -1,6 +1,5 @@
 package OpenMRS_Project;
 
-import Utility.BaseDriver;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -15,7 +14,7 @@ import static Utility.BaseDriver.wait;
 public class Zehra_POM {
 
     public Zehra_POM() {
-        PageFactory.initElements(driver,this);
+        PageFactory.initElements(driver, this);
     }
 
     @FindBy(xpath = "//a[@class='zak-button']")
@@ -54,8 +53,10 @@ public class Zehra_POM {
     public WebElement deleteReason;
     @FindBy(xpath = "(//button[text()='Confirm'])[4]")
     public WebElement confirmBtn;
+    @FindBy(css = "[aria-relevant='all']")
+    public WebElement deleteConfirm;
 
-    public void login(){
+    public void login() {
         driver.navigate().to("https://openmrs.org/demo/");
 
 
@@ -77,7 +78,7 @@ public class Zehra_POM {
         wait.until(ExpectedConditions.elementToBeClickable(loginButton));
         loginButton.click();
 
-
-
     }
+
+
 }
