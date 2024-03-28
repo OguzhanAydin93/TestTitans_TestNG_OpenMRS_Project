@@ -44,11 +44,12 @@ public class POM_Mert {
     @FindBy(css = "[class='icon-search']")
     public WebElement findPatientRecord;
 
-    @FindBy(xpath = "//tbody[@aria-live='polite']")
+    @FindBy(xpath = "//tbody[@aria-live='polite']//tr")
     public List<WebElement> hastaList;
 
     @FindBy(css = "[class='dataTables_info']")
     public WebElement showingEntries;
+
 
     JavascriptExecutor js = (JavascriptExecutor) BaseDriver.driver;
 
