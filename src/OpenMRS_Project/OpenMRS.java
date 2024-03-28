@@ -1,7 +1,6 @@
 package OpenMRS_Project;
 
 import Utility.BaseDriver;
-import Utility.MyFunc;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -9,6 +8,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
+import java.util.List;
+
 
 public class OpenMRS extends BaseDriver {
 
@@ -94,6 +96,7 @@ public class OpenMRS extends BaseDriver {
 
         }
     }
+
     @DataProvider
     Object[][] notSuccessfully() {
         Object[][] usernameAndPasswordd =
@@ -177,21 +180,27 @@ public class OpenMRS extends BaseDriver {
     }
 
 
-
     @DataProvider
     Object[] deletedPatient() {
         Object[] dltdPatient = {"zehra"};
         return dltdPatient;
 
     }
-    public void US_408_Mert_Oguzhan(){
+
+    @Test
+    public void US_408_Mert_Oguzhan() {
+
         POM_Mert elements = new POM_Mert();
         POM_Mert.Login();
         elements.findPatientRecord.click();
+        int indexOfF=(elements.showingEntries.getText().toLowerCase().lastIndexOf("f"));
+        int indexOfE=(elements.showingEntries.getText().toLowerCase().indexOf("e"));
+        String text=elements.showingEntries.getText().substring(indexOfF+1,indexOfE).trim();
+        int value=Integer.parseInt(text);
+        int hastaSayisi=elements.hastaList.size();
+
+        Assert.assertTrue(value==hastaSayisi,"Sayılar birbirine eşit değil.");
 
     }
-
-
-
 
 }
