@@ -66,11 +66,14 @@ public class OpenMRS extends BaseDriver {
 
         wait.until(ExpectedConditions.elementToBeClickable(elements.demoButton));
         elements.demoButton.click();
+
         elements.js.executeScript("arguments[0].scrollIntoView(true);", elements.exploreButton);
         wait.until(ExpectedConditions.elementToBeClickable(elements.exploreButton));
         elements.exploreButton.click();
+
         elements.js.executeScript("arguments[0].scrollIntoView(true);", elements.enterMrsButton);
         elements.js.executeScript("arguments[0].click();", elements.enterMrsButton);
+
         wait.until(ExpectedConditions.visibilityOf(elements.userName));
         elements.userName.sendKeys(userName);
         wait.until(ExpectedConditions.visibilityOf(elements.password));
