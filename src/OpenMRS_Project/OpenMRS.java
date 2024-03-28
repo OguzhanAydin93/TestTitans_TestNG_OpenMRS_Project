@@ -1,6 +1,7 @@
 package OpenMRS_Project;
 
 import Utility.BaseDriver;
+import org.apache.logging.log4j.core.net.Priority;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -15,7 +16,7 @@ import java.util.List;
 public class OpenMRS extends BaseDriver {
 
 
-    @Test(dataProvider = "Sifrelerim")
+    @Test(dataProvider = "Sifrelerim",priority = 1)
     public void US_401_Oguzhan(String username, String password) {
 
         driver.get("https://openmrs.org/demo/");
@@ -59,7 +60,7 @@ public class OpenMRS extends BaseDriver {
 
     }
 
-    @Test(dataProvider = "notSuccessfully")
+    @Test(dataProvider = "notSuccessfully",priority = 2)
     public void US_402_Mert(String userName, String password) {
         driver.get("https://openmrs.org/demo/");
         POM_Mert elements = new POM_Mert();
@@ -115,7 +116,7 @@ public class OpenMRS extends BaseDriver {
         return usernameAndPasswordd;
     }
 
-    @Test
+    @Test(priority = 3)
     public void US_403_Zehra() {
         Zehra_POM elements = new Zehra_POM();
         elements.login();
@@ -127,12 +128,12 @@ public class OpenMRS extends BaseDriver {
 
     }
 
-    @Test
+    @Test(priority = 4)
     public void US_404_Nuri() {
 
     }
 
-    @Test
+    @Test(priority = 5)
     public void US_405_Zehra() {
         Zehra_POM elements = new Zehra_POM();
         elements.login();
@@ -157,7 +158,7 @@ public class OpenMRS extends BaseDriver {
 
     }
 
-    @Test(dataProvider = "deletedPatient")
+    @Test(dataProvider = "deletedPatient",priority = 7)
     public void US_407_Zehra(String patientDeleted) {
         Zehra_POM elements = new Zehra_POM();
         Actions actionDriver = new Actions(driver);
@@ -190,7 +191,7 @@ public class OpenMRS extends BaseDriver {
 
     }
 
-    @Test
+    @Test(priority = 8)
     public void US_408_Mert_Oguzhan() {
 
         POM_Mert elements = new POM_Mert();
