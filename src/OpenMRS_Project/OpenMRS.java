@@ -1,7 +1,7 @@
 package OpenMRS_Project;
 
 import Utility.BaseDriver;
-import Utility.MyFunc;
+import org.apache.logging.log4j.core.net.Priority;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -10,10 +10,13 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
+
 public class OpenMRS extends BaseDriver {
 
 
-    @Test(dataProvider = "Sifrelerim")
+    @Test(dataProvider = "Sifrelerim",priority = 1)
     public void US_401_Oguzhan(String username, String password) {
 
         driver.get("https://openmrs.org/demo/");
@@ -21,22 +24,18 @@ public class OpenMRS extends BaseDriver {
         ElementBox elementler = new ElementBox();
 
         elementler.demo.click();
-
         wait.until(ExpectedConditions.elementToBeClickable(elementler.exploreOpenMRS2));
+        elementler.js.executeScript("arguments[0].scrollIntoView(true);", elementler.exploreOpenMRS2);
         elementler.exploreOpenMRS2.click();
-
         wait.until(ExpectedConditions.elementToBeClickable(elementler.enterOpenMRS2Demo));
-        MyFunc.bekle(1);
-        elementler.enterOpenMRS2Demo.click();
-
+        elementler.js.executeScript("arguments[0].scrollIntoView(true);", elementler.enterOpenMRS2Demo);
+        elementler.js.executeScript("arguments[0].click();", elementler.enterOpenMRS2Demo);
         wait.until(ExpectedConditions.visibilityOf(elementler.username));
         elementler.username.sendKeys(username);
         wait.until(ExpectedConditions.visibilityOf(elementler.password));
         elementler.password.sendKeys(password);
-
         wait.until(ExpectedConditions.elementToBeClickable(elementler.loginButton));
         elementler.loginButton.click();
-
         elementler.locationSelect.click();
         Assert.assertTrue(elementler.locationError.getText().contains("You must choose a location!"));
         elementler.loginButton.click();
@@ -61,17 +60,21 @@ public class OpenMRS extends BaseDriver {
 
     }
 
-    @Test(dataProvider = "notSuccessfully")
+    @Test(dataProvider = "notSuccessfully",priority = 2)
     public void US_402_Mert(String userName, String password) {
         driver.get("https://openmrs.org/demo/");
         POM_Mert elements = new POM_Mert();
 
         wait.until(ExpectedConditions.elementToBeClickable(elements.demoButton));
         elements.demoButton.click();
+
+        elements.js.executeScript("arguments[0].scrollIntoView(true);", elements.exploreButton);
         wait.until(ExpectedConditions.elementToBeClickable(elements.exploreButton));
         elements.exploreButton.click();
-        MyFunc.bekle(2);
-        elements.enterMrsButton.click();
+
+        elements.js.executeScript("arguments[0].scrollIntoView(true);", elements.enterMrsButton);
+        elements.js.executeScript("arguments[0].click();", elements.enterMrsButton);
+
         wait.until(ExpectedConditions.visibilityOf(elements.userName));
         elements.userName.sendKeys(userName);
         wait.until(ExpectedConditions.visibilityOf(elements.password));
@@ -96,7 +99,9 @@ public class OpenMRS extends BaseDriver {
 
 
         }
-    } @DataProvider
+    }
+
+    @DataProvider
     Object[][] notSuccessfully() {
         Object[][] usernameAndPasswordd =
                 {
@@ -111,10 +116,28 @@ public class OpenMRS extends BaseDriver {
         return usernameAndPasswordd;
     }
 
-    @Test
-    public void US_405_Zehra(){
-        Zehra_POM elements=new Zehra_POM();
+    @Test(priority = 3)
+    public void US_403_Zehra() {
+        Zehra_POM elements = new Zehra_POM();
         elements.login();
+
+        Assert.assertTrue(elements.superUser.isDisplayed());
+        wait.until(ExpectedConditions.elementToBeClickable(elements.logout));
+        elements.logout.click();
+        wait.until(ExpectedConditions.urlContains("login"));
+
+    }
+
+    @Test(priority = 4)
+    public void US_404_Nuri() {
+
+    }
+
+    @Test(priority = 5)
+    public void US_405_Zehra() {
+        Zehra_POM elements = new Zehra_POM();
+        elements.login();
+
         new Actions(driver).moveToElement(elements.admin).build().perform();
         wait.until(ExpectedConditions.elementToBeClickable(elements.myAccount));
         elements.myAccount.click();
@@ -123,7 +146,7 @@ public class OpenMRS extends BaseDriver {
 
         for (WebElement dogrula : elements.passwordLanguages) {
             System.out.println(dogrula.getText());
-            Assert.assertTrue(dogrula.isDisplayed(),"Change password ve My Languages bulunamadı.");
+            Assert.assertTrue(dogrula.isDisplayed(), "Change password ve My Languages bulunamadı.");
         }
 
         elements.changePassword.click();
@@ -133,61 +156,55 @@ public class OpenMRS extends BaseDriver {
         wait.until(ExpectedConditions.urlContains("changeDefaults"));
         driver.navigate().back();
 
+    }
+
+    @Test(dataProvider = "deletedPatient",priority = 7)
+    public void US_407_Zehra(String patientDeleted) {
+        Zehra_POM elements = new Zehra_POM();
+        Actions actionDriver = new Actions(driver);
+        elements.login();
+
+
+        elements.patientRecord.click();
+        elements.patientSearch.sendKeys(patientDeleted + Keys.ENTER);
+        elements.patientInfo.click();
+        wait.until(ExpectedConditions.urlContains("patientId"));
+        elements.patientDelete.click();
+        wait.until(ExpectedConditions.visibilityOf(elements.deleteReason));
+
+        actionDriver.click(elements.deleteReason).click().build();
+        actionDriver.sendKeys("Patient Request").build().perform();
+        actionDriver.click(elements.confirmBtn).build().perform();
+
+        wait.until(ExpectedConditions.urlContains("findPatient"));
+        elements.patientSearch.sendKeys(patientDeleted + Keys.ENTER);
+        Assert.assertTrue(elements.deleteConfirm.isDisplayed(), "Hasta silinemedi.");
+
 
     }
-        @Test
-    public void US_406_Asli(){
-
-        driver.get("https://openmrs.org/demo/");
-        Asli_POM elements=new Asli_POM();
 
 
-        wait.until(ExpectedConditions.elementToBeClickable(elements.demoButton));
-        elements.demoButton.click();
-        wait.until(ExpectedConditions.elementToBeClickable(elements.OpenMRS2Button));
-        elements.OpenMRS2Button.click();
-        wait.until(ExpectedConditions.elementToBeClickable(elements.enterOpenMrs2Button));
-        elements.enterOpenMrs2Button.click();
+    @DataProvider
+    Object[] deletedPatient() {
+        Object[] dltdPatient = {"zehra"};
+        return dltdPatient;
 
-        wait.until(ExpectedConditions.elementToBeClickable(elements.usernameInput));
-        elements.usernameInput.sendKeys("admin");
+    }
 
-        wait.until(ExpectedConditions.elementToBeClickable(elements.passwordInput));
-        elements.passwordInput.sendKeys("Admin123");
+    @Test(priority = 8)
+    public void US_408_Mert_Oguzhan() {
 
-        wait.until(ExpectedConditions.elementToBeClickable(elements.inpatientWard));
-        elements.inpatientWard.click();
-        wait.until(ExpectedConditions.elementToBeClickable(elements.loginButton));
-        elements.loginButton.click();
-
-        Assert.assertEquals(elements.assert1.getText(), "Logged in as Super User (admin) at Inpatient Ward.", "Oluşan Mesajlar Eşleşmiyor");
-
-        wait.until(ExpectedConditions.elementToBeClickable(elements.findPatientRecord));
+        POM_Mert elements = new POM_Mert();
+        POM_Mert.Login();
         elements.findPatientRecord.click();
-        wait.until(ExpectedConditions.elementToBeClickable(elements.hastaArama));
-        elements.hastaArama.sendKeys("100HNY",Keys.ENTER);
+        int indexOfF=(elements.showingEntries.getText().toLowerCase().lastIndexOf("f"));
+        int indexOfE=(elements.showingEntries.getText().toLowerCase().indexOf("e"));
+        String text=elements.showingEntries.getText().substring(indexOfF+1,indexOfE).trim();
+        int value=Integer.parseInt(text);
+        int hastaSayisi=elements.hastaList.size();
 
-       MyFunc.bekle(5);
+        Assert.assertTrue(value==hastaSayisi,"Sayılar birbirine eşit değil.");
 
-        Assert.assertTrue(driver.getCurrentUrl().contains("patientId"));
-
-
-        driver.navigate().back();
-
-        wait.until(ExpectedConditions.elementToBeClickable(elements.hastaArama));
-        elements.hastaArama.sendKeys("Asli",Keys.ENTER);
-
-        Assert.assertTrue(elements.no.isDisplayed(),"Ulaşılmadı");
-
-
-
-
-
-
-
-
-
-
-        }
+    }
 
 }
