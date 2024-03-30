@@ -1,9 +1,21 @@
 package OpenMRS_Project;
 
 import Utility.BaseDriver;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+
+import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.time.Duration;
+import java.util.List;
+
+import static Utility.BaseDriver.driver;
 
 public class Nuri_POM {
     public Nuri_POM() {
@@ -43,7 +55,7 @@ public class Nuri_POM {
     @FindBy(xpath = "//input[@name='familyName']")
     public WebElement familyName;
 
-    @FindBy(xpath ="//span[@id='genderLabel']" )
+    @FindBy(xpath = "//span[@id='genderLabel']")
     public WebElement genderLabel;
 
     @FindBy(xpath = "//option[.='Male']")
@@ -54,7 +66,7 @@ public class Nuri_POM {
 
     @FindBy(xpath = "//input[@id='birthdateDay-field']")
     public WebElement birthdayDay;
-    @FindBy(xpath = "//select[@id='birthdateMonth-field")
+    @FindBy(css = "select[name='birthdateMonth']")
     public WebElement birthdayMonth;
 
     @FindBy(xpath = "//input[@id='birthdateYear-field']")
@@ -63,46 +75,18 @@ public class Nuri_POM {
     @FindBy(xpath = "//span[.='Address']")
     public WebElement adress;
 
-    @FindBy(css = ".requireOne > p:nth-of-type(2) > [type='text']" )
+    @FindBy(css = ".requireOne > p:nth-of-type(2) > [type='text']")
     public WebElement adressName;
 
-    @FindBy(css = ".requireOne > p:nth-of-type(4) > [type='text']")
-    public WebElement address2;
-
-    @FindBy(xpath = "//input[@id='cityVillage']")
-    public WebElement cityName;
-
-    @FindBy(xpath = "//input[@id='stateProvince']")
-    public WebElement provinceName;
-
-    @FindBy(xpath = "//input[@id='country']")
-    public WebElement countryName;
-
-    @FindBy(xpath = "//input[@id='postalCode']")
-    public WebElement postalCode;
-
-    @FindBy(xpath = "//span[.='Phone Number']")
-    public WebElement phoneNumberBt;
-
-    @FindBy(css = "[name='phoneNumber']")
-    public WebElement phoneNumber;
-
-    @FindBy(xpath = "//span[.='Relatives']")
-    public WebElement relativesBt;
-
-    @FindBy(id = "relationship_type")
-    public WebElement relatives;
-
-    @FindBy(xpath = "//input[@class='person-typeahead ng-pristine ng-valid ng-empty ng-touched']" )
-    public WebElement personName;
-
-    @FindBy(xpath = "//span[@id='confirmation_label']")
-    public WebElement confirm;
+    @FindBy(id = "next-button")
+    public WebElement clickButton;
 
     @FindBy(xpath = "//input[@id='submit']")
     public WebElement confirmBt;
 
+    @FindBy(css = "div[class='float-sm-right']>span")
+    public WebElement patientID;
 
-
+    JavascriptExecutor js = (JavascriptExecutor) BaseDriver.driver;
 
 }

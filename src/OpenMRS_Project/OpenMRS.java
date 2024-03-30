@@ -2,15 +2,18 @@ package OpenMRS_Project;
 
 import Utility.BaseDriver;
 import org.apache.logging.log4j.core.net.Priority;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.time.Duration;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 
 public class OpenMRS extends BaseDriver {
@@ -130,6 +133,51 @@ public class OpenMRS extends BaseDriver {
 
     @Test(priority = 4)
     public void US_404_Nuri() {
+        BaseDriver.driver.navigate().to("https://openmrs.org/demo/");
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        Nuri_POM elements = new Nuri_POM();
+        elements.demoButton.click();
+        elements.js.executeScript("arguments[0].scrollIntoView(true);", elements.exploreButton);
+        wait.until(ExpectedConditions.elementToBeClickable(elements.exploreButton));
+        elements.exploreButton.click();
+
+        elements.js.executeScript("arguments[0].scrollIntoView(true);", elements.enterMrsButton);
+        elements.js.executeScript("arguments[0].click();", elements.enterMrsButton);
+        wait.until(ExpectedConditions.visibilityOf(elements.userName));
+        elements.userName.sendKeys("admin");
+        wait.until(ExpectedConditions.visibilityOf(elements.password));
+        elements.password.sendKeys("Admin123");
+        wait.until(ExpectedConditions.visibilityOf(elements.location));
+        elements.location.click();
+        wait.until(ExpectedConditions.visibilityOf(elements.logInButton));
+        elements.logInButton.click();
+        elements.registerButton.click();
+        elements.givenName.sendKeys("Test");
+        elements.middleName.sendKeys("Titans");
+        elements.familyName.sendKeys("Techno");
+        elements.genderLabel.click();
+        elements.male.click();
+        elements.birthdayLabel.click();
+        elements.birthdayDay.sendKeys("11");
+        Select select = new Select(elements.birthdayMonth);
+        select.selectByValue("5");
+        elements.birthdayYear.sendKeys("1976");
+        elements.adress.click();
+        elements.adressName.sendKeys("Turkey");
+        elements.clickButton.click();
+        elements.clickButton.click();
+        elements.clickButton.click();
+        elements.confirmBt.click();
+
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("givenName")));
+            System.out.println("Kayıt başarısız!");
+        } catch (TimeoutException e) {
+            System.out.println("Kayıt başarılı!");
+        }
+
+
 
     }
 
