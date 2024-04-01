@@ -254,5 +254,64 @@ public class OpenMRS extends BaseDriver {
         Assert.assertTrue(value==hastaSayisi,"Sayılar birbirine eşit değil.");
 
     }
+    @Test
+    public void US_406_Asli(){
+
+        driver.get("https://openmrs.org/demo/");
+        Asli_POM elements=new Asli_POM();
+
+
+        wait.until(ExpectedConditions.elementToBeClickable(elements.demoButton));
+        elements.demoButton.click();
+        wait.until(ExpectedConditions.elementToBeClickable(elements.OpenMRS2Button));
+        elements.OpenMRS2Button.click();
+        wait.until(ExpectedConditions.elementToBeClickable(elements.enterOpenMrs2Button));
+        elements.enterOpenMrs2Button.click();
+
+        wait.until(ExpectedConditions.elementToBeClickable(elements.usernameInput));
+        elements.usernameInput.sendKeys("admin");
+
+        wait.until(ExpectedConditions.elementToBeClickable(elements.passwordInput));
+        elements.passwordInput.sendKeys("Admin123");
+
+        wait.until(ExpectedConditions.elementToBeClickable(elements.inpatientWard));
+        elements.inpatientWard.click();
+        wait.until(ExpectedConditions.elementToBeClickable(elements.loginButton));
+        elements.loginButton.click();
+
+        Assert.assertEquals(elements.assert1.getText(),"Logged in as Super User (admin) at Inpatient Ward.","Oluşan Mesajlar Eşleşmiyor");
+
+        wait.until(ExpectedConditions.elementToBeClickable(elements.findPatientRecord));
+        elements.findPatientRecord.click();
+        wait.until(ExpectedConditions.elementToBeClickable(elements.hastaArama));
+        elements.hastaArama.sendKeys("100HNY",Keys.ENTER);
+
+
+
+        Assert.assertTrue(driver.getCurrentUrl().contains("patientId"));
+
+
+        driver.navigate().back();
+
+        wait.until(ExpectedConditions.elementToBeClickable(elements.hastaArama));
+        elements.hastaArama.sendKeys("Asli",Keys.ENTER);
+
+        Assert.assertTrue(elements.no.isDisplayed(),"Ulaşılmadı");
+
+
+
+
+
+
+
+
+
+
+    }
 
 }
+
+
+
+
+
