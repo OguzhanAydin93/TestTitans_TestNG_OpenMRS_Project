@@ -46,6 +46,8 @@ public class OpenMRS extends BaseDriver {
 
     }
 
+
+
     @DataProvider
     Object[][] Sifrelerim() {
         Object[][] kullaniciVeSifre =
@@ -182,7 +184,7 @@ public class OpenMRS extends BaseDriver {
     }
 
     @Test(priority = 5)
-    public void US_405_Zehra() {
+    public void US_405_Zehra_Hatun() {
         Zehra_POM elements = new Zehra_POM();
         elements.login();
 
