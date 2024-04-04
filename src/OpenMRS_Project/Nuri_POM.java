@@ -16,6 +16,7 @@ import java.time.Duration;
 import java.util.List;
 
 import static Utility.BaseDriver.driver;
+import static Utility.BaseDriver.wait;
 
 public class Nuri_POM {
     public Nuri_POM() {
@@ -87,6 +88,30 @@ public class Nuri_POM {
     @FindBy(css = "div[class='float-sm-right']>span")
     public WebElement patientID;
 
+    @FindBy(xpath = "//i[@class='icon-home small']")
+    public WebElement homeButton;
+    @FindBy(css = "[id='Inpatient Ward']")
+    public WebElement locationSelect;
+
     JavascriptExecutor js = (JavascriptExecutor) BaseDriver.driver;
+
+    public void login() {
+        driver.navigate().to("https://openmrs.org/demo/");
+
+        demoButton.click();
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView(true);", exploreButton);
+        exploreButton.click();
+        wait.until(ExpectedConditions.elementToBeClickable(enterMrsButton));
+        js.executeScript("arguments[0].scrollIntoView(true);", enterMrsButton);
+        js.executeScript("arguments[0].click();", enterMrsButton);
+        userName.sendKeys("admin");
+        wait.until(ExpectedConditions.visibilityOf(password));
+        password.sendKeys("Admin123");
+        locationSelect.click();
+        wait.until(ExpectedConditions.elementToBeClickable(logInButton));
+        logInButton.click();
+
+    }
 
 }

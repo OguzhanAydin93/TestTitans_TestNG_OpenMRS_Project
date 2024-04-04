@@ -1,25 +1,22 @@
 package OpenMRS_Project;
 
 import Utility.BaseDriver;
-import org.apache.logging.log4j.core.net.Priority;
+import Utility.MyFunc;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.time.Duration;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.ArrayList;
 
 
 public class OpenMRS extends BaseDriver {
 
 
-    @Test(dataProvider = "Sifrelerim",priority = 1)
+    @Test(dataProvider = "Sifrelerim", priority = 1)
     public void US_401_Oguzhan(String username, String password) {
 
         driver.get("https://openmrs.org/demo/");
@@ -47,7 +44,6 @@ public class OpenMRS extends BaseDriver {
     }
 
 
-
     @DataProvider
     Object[][] Sifrelerim() {
         Object[][] kullaniciVeSifre =
@@ -65,7 +61,7 @@ public class OpenMRS extends BaseDriver {
 
     }
 
-    @Test(dataProvider = "notSuccessfully",priority = 2)
+    @Test(dataProvider = "notSuccessfully", priority = 2)
     public void US_402_Mert(String userName, String password) {
         driver.get("https://openmrs.org/demo/");
         POM_Mert elements = new POM_Mert();
@@ -133,44 +129,32 @@ public class OpenMRS extends BaseDriver {
 
     }
 
-    @Test(priority = 4)
-    public void US_404_Nuri() {
-        BaseDriver.driver.navigate().to("https://openmrs.org/demo/");
-
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+    @Test(dataProvider = "hastaKayit", priority = 4)
+    public void US_404_Nuri(String givenname, String middlename, String familyname, String birthday, String birthmounth, String birthyear, String addressname, String country) {
+        driver.get("https://openmrs.org/demo/");
         Nuri_POM elements = new Nuri_POM();
-        elements.demoButton.click();
-        elements.js.executeScript("arguments[0].scrollIntoView(true);", elements.exploreButton);
-        wait.until(ExpectedConditions.elementToBeClickable(elements.exploreButton));
-        elements.exploreButton.click();
-
-        elements.js.executeScript("arguments[0].scrollIntoView(true);", elements.enterMrsButton);
-        elements.js.executeScript("arguments[0].click();", elements.enterMrsButton);
-        wait.until(ExpectedConditions.visibilityOf(elements.userName));
-        elements.userName.sendKeys("admin");
-        wait.until(ExpectedConditions.visibilityOf(elements.password));
-        elements.password.sendKeys("Admin123");
-        wait.until(ExpectedConditions.visibilityOf(elements.location));
-        elements.location.click();
-        wait.until(ExpectedConditions.visibilityOf(elements.logInButton));
-        elements.logInButton.click();
-        elements.registerButton.click();
-        elements.givenName.sendKeys("Test");
-        elements.middleName.sendKeys("Titans");
-        elements.familyName.sendKeys("Techno");
+        ElementBox2 elementBox2=new ElementBox2();
+        elements.login();
+        elements.js.executeScript("arguments[0].scrollIntoView(true);", elements.registerButton);
+        elements.js.executeScript("arguments[0].click();", elements.registerButton);
+        elements.givenName.sendKeys(givenname);
+        elements.middleName.sendKeys(middlename);
+        elements.familyName.sendKeys(familyname);
         elements.genderLabel.click();
         elements.male.click();
         elements.birthdayLabel.click();
-        elements.birthdayDay.sendKeys("11");
+        elements.birthdayDay.sendKeys(birthday);
         Select select = new Select(elements.birthdayMonth);
-        select.selectByValue("5");
-        elements.birthdayYear.sendKeys("1976");
+        select.selectByValue(birthmounth);
+        elements.birthdayYear.sendKeys(birthyear);
         elements.adress.click();
-        elements.adressName.sendKeys("Turkey");
+        elements.adressName.sendKeys(addressname);
+        elementBox2.country.sendKeys(country);
         elements.clickButton.click();
         elements.clickButton.click();
         elements.clickButton.click();
         elements.confirmBt.click();
+        elements.homeButton.click();
 
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("givenName")));
@@ -180,8 +164,21 @@ public class OpenMRS extends BaseDriver {
         }
 
 
+    }
+
+    @DataProvider
+    Object[][] hastaKayit() {
+        Object[][] datalarim =
+                {
+                        {"Nuri", "Er", "techno", "20", "5", "1991", "66628 Uluyol","Turkey"},
+                        {"Nuri2", "Er2", "techno", "20", "5", "1991", "66628 Uluyol","Turkey"}
+
+                };
+
+        return datalarim;
 
     }
+
 
     @Test(priority = 5)
     public void US_405_Zehra_Hatun() {
@@ -208,7 +205,7 @@ public class OpenMRS extends BaseDriver {
 
     }
 
-    @Test(dataProvider = "deletedPatient",priority = 7)
+    @Test(dataProvider = "deletedPatient", priority = 7)
     public void US_407_Zehra(String patientDeleted) {
         Zehra_POM elements = new Zehra_POM();
         Actions actionDriver = new Actions(driver);
@@ -247,20 +244,21 @@ public class OpenMRS extends BaseDriver {
         POM_Mert elements = new POM_Mert();
         POM_Mert.Login();
         elements.findPatientRecord.click();
-        int indexOfF=(elements.showingEntries.getText().toLowerCase().lastIndexOf("f"));
-        int indexOfE=(elements.showingEntries.getText().toLowerCase().indexOf("e"));
-        String text=elements.showingEntries.getText().substring(indexOfF+1,indexOfE).trim();
-        int value=Integer.parseInt(text);
-        int hastaSayisi=elements.hastaList.size();
+        int indexOfF = (elements.showingEntries.getText().toLowerCase().lastIndexOf("f"));
+        int indexOfE = (elements.showingEntries.getText().toLowerCase().indexOf("e"));
+        String text = elements.showingEntries.getText().substring(indexOfF + 1, indexOfE).trim();
+        int value = Integer.parseInt(text);
+        int hastaSayisi = elements.hastaList.size();
 
-        Assert.assertTrue(value==hastaSayisi,"Sayılar birbirine eşit değil.");
+        Assert.assertTrue(value == hastaSayisi, "Sayılar birbirine eşit değil.");
 
     }
+
     @Test
-    public void US_406_Asli(){
+    public void US_406_Asli() {
 
         driver.get("https://openmrs.org/demo/");
-        Asli_POM elements=new Asli_POM();
+        Asli_POM elements = new Asli_POM();
 
 
         wait.until(ExpectedConditions.elementToBeClickable(elements.demoButton));
@@ -281,13 +279,12 @@ public class OpenMRS extends BaseDriver {
         wait.until(ExpectedConditions.elementToBeClickable(elements.loginButton));
         elements.loginButton.click();
 
-        Assert.assertEquals(elements.assert1.getText(),"Logged in as Super User (admin) at Inpatient Ward.","Oluşan Mesajlar Eşleşmiyor");
+        Assert.assertEquals(elements.assert1.getText(), "Logged in as Super User (admin) at Inpatient Ward.", "Oluşan Mesajlar Eşleşmiyor");
 
         wait.until(ExpectedConditions.elementToBeClickable(elements.findPatientRecord));
         elements.findPatientRecord.click();
         wait.until(ExpectedConditions.elementToBeClickable(elements.hastaArama));
-        elements.hastaArama.sendKeys("100HNY",Keys.ENTER);
-
+        elements.hastaArama.sendKeys("100HNY", Keys.ENTER);
 
 
         Assert.assertTrue(driver.getCurrentUrl().contains("patientId"));
@@ -296,25 +293,52 @@ public class OpenMRS extends BaseDriver {
         driver.navigate().back();
 
         wait.until(ExpectedConditions.elementToBeClickable(elements.hastaArama));
-        elements.hastaArama.sendKeys("Asli",Keys.ENTER);
+        elements.hastaArama.sendKeys("Asli", Keys.ENTER);
 
-        Assert.assertTrue(elements.no.isDisplayed(),"Ulaşılmadı");
+        Assert.assertTrue(elements.no.isDisplayed(), "Ulaşılmadı");
 
 
     }
 
     @Test
-    public void US_409_Oguzhan(){
+    public void US_409_Oguzhan() {
+        ElementBox2 elementler2 = new ElementBox2();
+        Nuri_POM elements = new Nuri_POM();
 
-
-
-
-        
-
+        ArrayList<String> hastalar=new ArrayList<>();
+        elements.login();
+        elementler2.searchPatient.click();
+        wait.until(ExpectedConditions.visibilityOf(elementler2.searchPatientBox));
+        elementler2.searchPatientBox.sendKeys("Nuri Er");
+        wait.until(ExpectedConditions.elementToBeClickable(elementler2.patientRow));
+        elementler2.patientRow.click();
+        MyFunc.bekle(1);
+      String id1 = elementler2.patientId.getText();
+//        hastalar.add(elementler2.patientId);
+        elementler2.homeButton.click();
+        elementler2.searchPatient.click();
+        wait.until(ExpectedConditions.visibilityOf(elementler2.searchPatientBox));
+        elementler2.searchPatientBox.sendKeys("Ugur Er");
+        wait.until(ExpectedConditions.elementToBeClickable(elementler2.patientRow));
+        elementler2.patientRow.click();
+        MyFunc.bekle(1);
+        String id2 = elementler2.patientId.getText();
+//        hastalar.add(elementler2.patientId);
+        elementler2.homeButton.click();
+        elementler2.dataManagementButton.click();
+        elementler2.mergeButton.click();
+        elementler2.patient1.sendKeys(id1);
+        elementler2.patient2.sendKeys(id2);
+        wait.until(ExpectedConditions.elementToBeClickable(elementler2.patientSearchClick));
+        elementler2.patientSearchClick.click();
+        Assert.assertTrue(elementler2.mergindSuccess.getText().contains("Merging cannot be undone"));
+        elementler2.clickPatient.click();
+        elementler2.continueButton.click();
+        Assert.assertTrue(elementler2.mergindSuccess.getText().contains(hastalar.get(1)));
+        Assert.assertTrue(elementler2.mergindSuccess.getText().contains("Merging cannot be undone"));
 
 
     }
-
 
 
 }
