@@ -11,6 +11,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class OpenMRS extends BaseDriver {
@@ -130,10 +131,9 @@ public class OpenMRS extends BaseDriver {
     }
 
     @Test(dataProvider = "hastaKayit", priority = 4)
-    public void US_404_Nuri(String givenname, String middlename, String familyname, String birthday, String birthmounth, String birthyear, String addressname, String country) {
+    public void US_404_Nuri(String givenname, String middlename, String familyname, String birthday, String birthmounth, String birthyear, String addressname) {
         driver.get("https://openmrs.org/demo/");
         Nuri_POM elements = new Nuri_POM();
-        ElementBox2 elementBox2=new ElementBox2();
         elements.login();
         elements.js.executeScript("arguments[0].scrollIntoView(true);", elements.registerButton);
         elements.js.executeScript("arguments[0].click();", elements.registerButton);
@@ -149,7 +149,6 @@ public class OpenMRS extends BaseDriver {
         elements.birthdayYear.sendKeys(birthyear);
         elements.adress.click();
         elements.adressName.sendKeys(addressname);
-        elementBox2.country.sendKeys(country);
         elements.clickButton.click();
         elements.clickButton.click();
         elements.clickButton.click();
@@ -170,8 +169,7 @@ public class OpenMRS extends BaseDriver {
     Object[][] hastaKayit() {
         Object[][] datalarim =
                 {
-                        {"Nuri", "Er", "techno", "20", "5", "1991", "66628 Uluyol","Turkey"},
-                        {"Nuri2", "Er2", "techno", "20", "5", "1991", "66628 Uluyol","Turkey"}
+                        {"Nuri", "Er", "techno", "20", "5", "1991", "66628 Uluyol"},
 
                 };
 
@@ -305,30 +303,28 @@ public class OpenMRS extends BaseDriver {
         ElementBox2 elementler2 = new ElementBox2();
         Nuri_POM elements = new Nuri_POM();
 
-        ArrayList<String> hastalar=new ArrayList<>();
+        List<String> hastalar=new ArrayList<>();
         elements.login();
         elementler2.searchPatient.click();
         wait.until(ExpectedConditions.visibilityOf(elementler2.searchPatientBox));
         elementler2.searchPatientBox.sendKeys("Nuri Er");
         wait.until(ExpectedConditions.elementToBeClickable(elementler2.patientRow));
         elementler2.patientRow.click();
-        MyFunc.bekle(1);
-      String id1 = elementler2.patientId.getText();
-//        hastalar.add(elementler2.patientId);
+        MyFunc.bekle(2);
+        hastalar.add(elementler2.patientId.getText());
         elementler2.homeButton.click();
         elementler2.searchPatient.click();
         wait.until(ExpectedConditions.visibilityOf(elementler2.searchPatientBox));
-        elementler2.searchPatientBox.sendKeys("Ugur Er");
+        elementler2.searchPatientBox.sendKeys("Oguzhan Aydın");
         wait.until(ExpectedConditions.elementToBeClickable(elementler2.patientRow));
         elementler2.patientRow.click();
-        MyFunc.bekle(1);
-        String id2 = elementler2.patientId.getText();
-//        hastalar.add(elementler2.patientId);
+        MyFunc.bekle(2);
+        hastalar.add(elementler2.patientId.getText());
         elementler2.homeButton.click();
         elementler2.dataManagementButton.click();
         elementler2.mergeButton.click();
-        elementler2.patient1.sendKeys(id1);
-        elementler2.patient2.sendKeys(id2);
+        elementler2.patient1.sendKeys(hastalar.get(0));
+        elementler2.patient2.sendKeys(hastalar.get(1));
         wait.until(ExpectedConditions.elementToBeClickable(elementler2.patientSearchClick));
         elementler2.patientSearchClick.click();
         Assert.assertTrue(elementler2.mergindSuccess.getText().contains("Merging cannot be undone"));
