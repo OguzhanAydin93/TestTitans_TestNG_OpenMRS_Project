@@ -347,8 +347,8 @@ public class OpenMRS extends BaseDriver {
         elements.appoinmentSearch.sendKeys("zehra");
         wait.until(ExpectedConditions.visibilityOf(elements.patientInfo));
         elements.patientInfo.click();
-
-
+        wait.until(ExpectedConditions.urlContains("appointmentschedulingui"));
+        Assert.assertTrue(elements.text.isDisplayed(),"Hata mesajı görüntülenemedi.");
 
     }
 }

@@ -65,8 +65,6 @@ public class Zehra_POM {
     public WebElement manageAppoinment;
     @FindBy(css = "[id='patient-search']")
     public WebElement appoinmentSearch;
-    @FindBy(css = "//div[@class='dataTables_wrapper']/table/tbody/tr")
-    public WebElement patientButton;
     @FindBy(xpath = "//div[@class='text']/p")
     public WebElement text;
 
