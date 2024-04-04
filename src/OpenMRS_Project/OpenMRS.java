@@ -351,6 +351,13 @@ public class OpenMRS extends BaseDriver {
         Assert.assertTrue(elements.text.isDisplayed(),"Hata mesajı görüntülenemedi.");
 
     }
+    @Test
+    public void US_411_Zehra(){
+        Zehra_POM elements = new Zehra_POM();
+        elements.login();
+
+
+    }
 }
 
 
