@@ -303,7 +303,7 @@ public class OpenMRS extends BaseDriver {
         ElementBox2 elementler2 = new ElementBox2();
         Nuri_POM elements = new Nuri_POM();
 
-        List<String> hastalar=new ArrayList<>();
+        List<String> hastalar = new ArrayList<>();
         elements.login();
         elementler2.searchPatient.click();
         wait.until(ExpectedConditions.visibilityOf(elementler2.searchPatientBox));
@@ -336,7 +336,36 @@ public class OpenMRS extends BaseDriver {
 
     }
 
+    @Test
+    public void US_410_Zehra() {
+        Zehra_POM elements = new Zehra_POM();
+        elements.login();
 
+        elements.appoinment.click();
+        elements.manageAppoinment.click();
+        wait.until(ExpectedConditions.urlContains("findPatient"));
+        elements.appoinmentSearch.sendKeys("zehra");
+        wait.until(ExpectedConditions.visibilityOf(elements.patientInfo));
+        elements.patientInfo.click();
+        wait.until(ExpectedConditions.urlContains("appointmentschedulingui"));
+        Assert.assertTrue(elements.text.isDisplayed(),"Hata mesajı görüntülenemedi.");
+
+    }
+    @Test
+    public void US_411_Zehra(){
+        Zehra_POM elements = new Zehra_POM();
+        elements.login();
+
+        elements.appoinment.click();
+        elements.manageAppoinment.click();
+        wait.until(ExpectedConditions.urlContains("findPatient"));
+        elements.appoinmentSearch.sendKeys("zehra");
+        wait.until(ExpectedConditions.visibilityOf(elements.patientInfo));
+        elements.patientInfo.click();
+        wait.until(ExpectedConditions.urlContains("appointmentschedulingui"));
+        Assert.assertFalse(elements.text.isDisplayed(),"Hata mesajı görüntülenemedi.");
+
+    }
 }
 
 
