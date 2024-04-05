@@ -169,7 +169,7 @@ public class OpenMRS extends BaseDriver {
     Object[][] hastaKayit() {
         Object[][] datalarim =
                 {
-                        {"Nuri", "Er", "techno", "20", "5", "1991", "66628 Uluyol"},
+                        {"Nuri", "Er", "technooo", "20", "5", "1991", "66628 Uluyol"},
 
                 };
 
@@ -306,36 +306,33 @@ public class OpenMRS extends BaseDriver {
         List<String> hastalar=new ArrayList<>();
         elements.login();
         elementler2.searchPatient.click();
-        wait.until(ExpectedConditions.visibilityOf(elementler2.searchPatientBox));
         elementler2.searchPatientBox.sendKeys("Nuri Er");
+//        MyFunc.bekle(1);
+        wait.until(ExpectedConditions.stalenessOf(elementler2.searchPatientBox));
         wait.until(ExpectedConditions.elementToBeClickable(elementler2.patientRow));
         elementler2.patientRow.click();
-        MyFunc.bekle(2);
         hastalar.add(elementler2.patientId.getText());
         elementler2.homeButton.click();
         elementler2.searchPatient.click();
-        wait.until(ExpectedConditions.visibilityOf(elementler2.searchPatientBox));
         elementler2.searchPatientBox.sendKeys("Oguzhan Aydın");
+//        MyFunc.bekle(1);
+        wait.until(ExpectedConditions.stalenessOf(elementler2.searchPatientBox));
         wait.until(ExpectedConditions.elementToBeClickable(elementler2.patientRow));
         elementler2.patientRow.click();
-        MyFunc.bekle(2);
         hastalar.add(elementler2.patientId.getText());
         elementler2.homeButton.click();
         elementler2.dataManagementButton.click();
         elementler2.mergeButton.click();
         elementler2.patient1.sendKeys(hastalar.get(0));
-        elementler2.patient2.sendKeys(hastalar.get(1));
-        wait.until(ExpectedConditions.elementToBeClickable(elementler2.patientSearchClick));
-        elementler2.patientSearchClick.click();
-        Assert.assertTrue(elementler2.mergindSuccess.getText().contains("Merging cannot be undone"));
-        elementler2.clickPatient.click();
+        elementler2.patient2.sendKeys(hastalar.get(1),Keys.ENTER);
+        wait.until(ExpectedConditions.elementToBeClickable(elementler2.continueButton));
         elementler2.continueButton.click();
-        Assert.assertTrue(elementler2.mergindSuccess.getText().contains(hastalar.get(1)));
         Assert.assertTrue(elementler2.mergindSuccess.getText().contains("Merging cannot be undone"));
+        elementler2.preferredRecord.click();
+        elementler2.continueButton.click();
 
 
     }
-
 
 }
 

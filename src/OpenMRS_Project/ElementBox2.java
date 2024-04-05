@@ -20,34 +20,23 @@ public class ElementBox2 {
     public WebElement patient1;
     @FindBy(id = "patient2-text")
     public WebElement patient2;
-    @FindBy(id = "patient-search")
-    public WebElement patientSearchClick;
-
     @FindBy(id = "confirm-button")
     public WebElement continueButton;
     @FindBy(xpath = "//div[@id='apps']//a[1]")
     public WebElement searchPatient;
-
     @FindBy(xpath = "//input[@id='patient-search']")
     public WebElement searchPatientBox;
-
     @FindBy(xpath = "(//tr[@class='odd'])[1]")
     public WebElement patientRow;
-
     @FindBy(xpath = "//div[@class='float-sm-right']/span")
     public WebElement patientId;
-
     @FindBy(xpath = "//i[@class='icon-home small']")
     public WebElement homeButton;
-
     @FindBy(xpath = "//h1[contains(text(),'Merging cannot be undone!')]")
     public WebElement mergindSuccess;
+    @FindBy(css = "[id='first-patient']")
+    public WebElement preferredRecord;
 
-    @FindBy(id = "first-patient")
-    public WebElement clickPatient;
-
-    @FindBy(xpath = "//input[@id='country']")
-    public WebElement country;
 
 
 
