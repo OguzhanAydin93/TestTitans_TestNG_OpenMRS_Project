@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 public class US_402_Mert extends BaseDriver {
 
-    @Test(dataProvider = "notSuccessfully")
+    @Test(dataProvider = "notSuccessfully",groups = {"Smoke","Login Test"})
     public void US_402_Mert(String userName, String password) {
         driver.get("https://openmrs.org/demo/");
         POM_Mert elements = new POM_Mert();

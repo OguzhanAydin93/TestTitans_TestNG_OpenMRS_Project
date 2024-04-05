@@ -5,7 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class US_408_Mert_Oguzhan extends BaseDriver {
-    @Test()
+    @Test(groups = {"Regression","Patient Management Testing"})
     public void US_408_Mert_Oguzhan() {
 
         POM_Mert elements = new POM_Mert();

@@ -7,12 +7,13 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+
 import static Utility.BaseDriver.driver;
 import static Utility.BaseDriver.wait;
 
 public class Nuri_POM {
     public Nuri_POM() {
-        PageFactory.initElements(BaseDriver.driver, this);
+        PageFactory.initElements(driver, this);
     }
 
     @FindBy(css = "[class='zak-header-button zak-header-button--1']>a")
@@ -85,7 +86,7 @@ public class Nuri_POM {
     @FindBy(css = "[id='Inpatient Ward']")
     public WebElement locationSelect;
 
-    JavascriptExecutor js = (JavascriptExecutor) BaseDriver.driver;
+    JavascriptExecutor js = (JavascriptExecutor) driver;
 
     public void login() {
         driver.navigate().to("https://openmrs.org/demo/");

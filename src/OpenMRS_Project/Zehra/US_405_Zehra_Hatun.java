@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 
 public class US_405_Zehra_Hatun extends BaseDriver {
 
-    @Test()
+    @Test(groups = {"Smoke"})
     public void US_405_Zehra_Hatun() {
         Zehra_POM elements = new Zehra_POM();
         elements.login();

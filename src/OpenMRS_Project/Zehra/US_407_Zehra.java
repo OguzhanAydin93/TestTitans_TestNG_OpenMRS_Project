@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 
 public class US_407_Zehra extends BaseDriver {
 
-    @Test(dataProvider = "deletedPatient")
+    @Test(dataProvider = "deletedPatient",groups = {"Smoke","Patient Management Testing"})
     public void US_407_Zehra(String patientDeleted) {
         Zehra_POM elements = new Zehra_POM();
         Actions actionDriver = new Actions(driver);
