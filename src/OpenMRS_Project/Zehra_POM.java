@@ -59,6 +59,14 @@ public class Zehra_POM {
     public WebElement superUser;
     @FindBy(css = "[class='nav-item logout']>a")
     public WebElement logout;
+    @FindBy(xpath = "(//a[@class='btn btn-default btn-lg button app big align-self-center'])[5]")
+    public WebElement appoinment;
+    @FindBy(xpath = "(//a[@class='btn btn-default btn-lg button app big align-self-center'])[3]")
+    public WebElement manageAppoinment;
+    @FindBy(css = "[id='patient-search']")
+    public WebElement appoinmentSearch;
+    @FindBy(xpath = "//div[@class='text']/p")
+    public WebElement text;
 
 
     public void login() {
