@@ -1,4 +1,4 @@
-package OpenMRS_Project;
+package OpenMRS_Project.Mert;
 
 import Utility.BaseDriver;
 import org.openqa.selenium.JavascriptExecutor;
