@@ -1,4 +1,4 @@
-package OpenMRS_Project;
+package OpenMRS_Project.Zehra;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -71,14 +71,16 @@ public class Zehra_POM {
 
     public void login() {
         driver.navigate().to("https://openmrs.org/demo/");
-
-
-        demoButton.click();
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].scrollIntoView(true);", exploreOpenMRS2);
 
-        exploreOpenMRS2.click();
-        enterOpenMRS2Demo.click();
+
+        wait.until(ExpectedConditions.elementToBeClickable(demoButton));
+        js.executeScript("arguments[0].click();",demoButton);
+        js.executeScript("arguments[0].scrollIntoView(true);", exploreOpenMRS2);
+        js.executeScript("arguments[0].click();",exploreOpenMRS2);
+
+        js.executeScript("arguments[0].scrollIntoView(true);", enterOpenMRS2Demo);
+        js.executeScript("arguments[0].click();",enterOpenMRS2Demo);
         wait.until(ExpectedConditions.urlContains("login"));
         username.sendKeys("admin");
         password.sendKeys("Admin123");

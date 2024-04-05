@@ -1,4 +1,4 @@
-package OpenMRS_Project;
+package OpenMRS_Project.Oguzhan;
 
 import Utility.BaseDriver;
 import org.openqa.selenium.JavascriptExecutor;
