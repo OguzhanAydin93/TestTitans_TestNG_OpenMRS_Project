@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<suite name="my suit">
+    <test name="test1">
+        <parameter name="browserTipi" value="edge"></parameter>
+
+        <!-- hangi gruplar çalıştırılacak-->
+        <groups>
+            <run>
+                <include name="Smoke"></include>
+                <include name="Logout Testing"></include>
+            </run>
+        </groups>
+        <!--çalışacak classların yazıldığı bölüm-->
+        <classes>
+            <class name="OpenMRS_Project.Zehra.US_403_Zehra"></class>
+        </classes>
+
+    </test>
+
+    <test name="test2">
+        <parameter name="browserTipi" value="chrome"></parameter>
+
+        <!-- hangi gruplar çalıştırılacak-->
+        <groups>
+            <run>
+                <include name="Smoke"></include>
+            </run>
+        </groups>
+
+        <!--çalışacak classların yazıldığı bölüm-->
+        <classes>
+            <class name="OpenMRS_Project.Zehra.US_405_Zehra_Hatun"></class>
+        </classes>
+
+    </test>
+
+    <test name="test3">
+        <parameter name="browserTipi" value="chrome"></parameter>
+
+        <!-- hangi gruplar çalıştırılacak-->
+        <groups>
+            <run>
+                <include name="Smoke"></include>
+                <include name="Patient Management Testing"></include>
+            </run>
+        </groups>
+
+        <!--çalışacak classların yazıldığı bölüm-->
+        <classes>
+            <class name="OpenMRS_Project.Zehra.US_407_Zehra"></class>
+        </classes>
+
+    </test>
+
+    <test name="test4">
+        <parameter name="browserTipi" value="chrome"></parameter>
+
+        <!-- hangi gruplar çalıştırılacak-->
+        <groups>
+            <run>
+                <include name="Appointment Testing"></include>
+                <include name="Regression"></include>
+            </run>
+        </groups>
+
+        <!--çalışacak classların yazıldığı bölüm-->
+        <classes>
+            <class name="OpenMRS_Project.Zehra.US_410_Zehra"></class>
+        </classes>
+
+    </test>
+
+    <test name="test5">
+        <parameter name="browserTipi" value="chrome"></parameter>
+
+        <!-- hangi gruplar çalıştırılacak-->
+        <groups>
+            <run>
+                <include name="Appointment Testing"></include>
+                <include name="Regression"></include>
+            </run>
+        </groups>
+
+        <!--çalışacak classların yazıldığı bölüm-->
+        <classes>
+            <class name="OpenMRS_Project.Zehra.US_411_Zehra"></class>
+        </classes>
+
+    </test>
+
+</suite>

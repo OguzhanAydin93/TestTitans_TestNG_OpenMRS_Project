@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 
 public class US_404_Nuri extends BaseDriver {
 
-    @Test(dataProvider = "hastaKayit")
+    @Test(dataProvider = "hastaKayit",groups = {"Regression"})
     public void US_404_Nuri(String givenname, String middlename, String familyname, String birthday, String birthmounth, String birthyear, String addressname) {
         driver.get("https://openmrs.org/demo/");
         Nuri_POM elements = new Nuri_POM();

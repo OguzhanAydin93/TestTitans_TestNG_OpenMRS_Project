@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 
 public class US_406_Asli extends BaseDriver {
 
-    @Test
+    @Test(groups = {"Smoke","Login Test"})
     public void US_406_Asli() {
 
 

@@ -13,7 +13,7 @@ import java.util.List;
 
 public class US_409_Oguzhan extends BaseDriver {
 
-    @Test
+    @Test(groups = {"Patient Management Testing","Regression"})
     public void US_409_Oguzhan() {
         ElementBox2 elementler2 = new ElementBox2();
         Nuri_POM elements = new Nuri_POM();

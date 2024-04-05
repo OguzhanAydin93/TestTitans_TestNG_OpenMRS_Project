@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 public class US_403_Zehra extends BaseDriver {
 
-    @Test()
+    @Test(groups = {"Smoke","Logout Testing"})
     public void US_403_Zehra() {
         Zehra_POM elements = new Zehra_POM();
         elements.login();

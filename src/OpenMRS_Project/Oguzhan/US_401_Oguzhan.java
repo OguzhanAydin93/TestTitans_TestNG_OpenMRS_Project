@@ -7,7 +7,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class US_401_Oguzhan extends BaseDriver {
-    @Test(dataProvider = "Sifrelerim")
+    @Test(dataProvider = "Sifrelerim",groups = {"Smoke","Login Test"})
     public void US_401_Oguzhan(String username, String password) {
 
         driver.get("https://openmrs.org/demo/");
